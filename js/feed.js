@@ -1,140 +1,167 @@
 /* =========================================
-   FEED INTERACTION LOGIC
+   FEED LOGIC & REALTIME POSTS
    ========================================= */
 
-// 1. MCQ / QUIZ LOGIC (Sabse Important)
-// HTML me use karein: onclick="checkMCQ(this, 'A', 'B')" 
-// (Jahan 'A' clicked option hai, aur 'B' sahi answer hai)
+// App load hote hi posts sunna shuru karo
+document.addEventListener('DOMContentLoaded', () => {
+    loadRealPosts();
+});
 
+// 1. LOAD POSTS FROM FIREBASE (Realtime)
+function loadRealPosts() {
+    const feedContainer = document.getElementById('feed-container');
+    
+    // Agar HTML me container nahi hai to ruk jao
+    if(!feedContainer) return;
+
+    // Database Listener (Jaise hi koi post karega, ye turant dikhayega)
+    db.collection("posts")
+      .orderBy("timestamp", "desc") // Newest posts upar
+      .onSnapshot((snapshot) => {
+        
+        feedContainer.innerHTML = ''; // Purana content saaf
+
+        if (snapshot.empty) {
+            feedContainer.innerHTML = '<div class="text-center p-4 text-muted">No posts yet. Be the first to post!</div>';
+            return;
+        }
+
+        snapshot.forEach((doc) => {
+            const post = doc.data();
+            const postId = doc.id;
+            
+            // Post HTML generate karo based on style
+            const html = createPostHTML(post, postId);
+            feedContainer.innerHTML += html;
+        });
+    }, (error) => {
+        console.error("Error loading posts:", error);
+        feedContainer.innerHTML = '<div class="text-center text-danger p-3">Error loading feed.</div>';
+    });
+}
+
+// 2. HTML GENERATOR (Clean vs Colorful)
+function createPostHTML(post, id) {
+    // Default Avatar agar photo na ho
+    const userPic = post.authorPic || "assets/user-placeholder.jpg";
+    const userName = post.authorName || "Unknown User";
+    
+    // --- STYLE 1: COLORFUL (Center Text) ---
+    if (post.type === 'colorful') {
+        return `
+        <div class="custom-card p-3" id="post-${id}">
+            <div class="d-flex align-items-center mb-2">
+                <img src="${userPic}" class="user-avatar-small me-2">
+                <div>
+                    <h6 class="mb-0 fw-bold">${userName}</h6>
+                    <small class="text-muted">Just now</small>
+                </div>
+                <i class="bi bi-three-dots ms-auto header-icon" onclick="openKebabMenu()"></i>
+            </div>
+            
+            <div class="styled-text-container" style="background: ${post.bgCode};">
+                ${post.text}
+            </div>
+            
+            <div class="d-flex justify-content-between mt-2 px-1 text-secondary post-actions">
+                <span class="action-btn" onclick="toggleLike(this)"><i class="bi bi-heart"></i> ${post.likes || 0}</span>
+                <span class="action-btn"><i class="bi bi-chat"></i> ${post.comments || 0}</span>
+                <span class="action-btn" onclick="toggleSave(this)"><i class="bi bi-share"></i></span>
+            </div>
+        </div>`;
+    } 
+    
+    // --- STYLE 2: CLEAN (White BG, Left Text) ---
+    else {
+        return `
+        <div class="custom-card p-3" id="post-${id}">
+            <div class="d-flex align-items-center mb-2">
+                <img src="${userPic}" class="user-avatar-small me-2">
+                <div>
+                    <h6 class="mb-0 fw-bold">${userName}</h6>
+                    <small class="text-muted">Just now</small>
+                </div>
+                <i class="bi bi-three-dots ms-auto header-icon" onclick="openKebabMenu()"></i>
+            </div>
+            
+            <p class="simple-text-post">${post.text}</p>
+            
+            <div class="d-flex justify-content-between mt-2 px-1 text-secondary post-actions">
+                <span class="action-btn" onclick="toggleLike(this)"><i class="bi bi-heart"></i> ${post.likes || 0}</span>
+                <span class="action-btn"><i class="bi bi-chat"></i> ${post.comments || 0}</span>
+                <span class="action-btn" onclick="toggleSave(this)"><i class="bi bi-share"></i></span>
+            </div>
+        </div>`;
+    }
+}
+
+/* =========================================
+   INTERACTION LOGIC (Like, Quiz, Save)
+   ========================================= */
+
+// 3. LIKE ANIMATION
+function toggleLike(btnElement) {
+    const icon = btnElement.querySelector('i');
+    
+    // Toggle Class
+    btnElement.classList.toggle('liked');
+
+    if (btnElement.classList.contains('liked')) {
+        icon.classList.remove('bi-heart');
+        icon.classList.add('bi-heart-fill');
+        // Future: Update database here
+    } else {
+        icon.classList.remove('bi-heart-fill');
+        icon.classList.add('bi-heart');
+    }
+}
+
+// 4. SAVE / BOOKMARK
+function toggleSave(btnElement) {
+    const icon = btnElement.querySelector('i');
+    btnElement.classList.toggle('saved');
+
+    if (btnElement.classList.contains('saved')) {
+        // Share logic or save logic
+        alert("Link copied (Test)");
+    }
+}
+
+// 5. SMART QUIZ LOGIC (For Quiz Posts)
 function checkMCQ(element, selectedOption, correctOption) {
-    // Parent container dhundo taaki baki options disable kar sakein
     const parent = element.parentElement;
-    const allOptions = parent.querySelectorAll('.mcq-option');
     const solutionBox = parent.querySelector('.solution-content');
 
-    // Agar pehle se click ho chuka hai, to wapas kuch mat karo
     if (parent.getAttribute('data-answered') === 'true') return;
 
-    // Mark as answered
     parent.setAttribute('data-answered', 'true');
 
-    // CHECK LOGIC:
     if (selectedOption === correctOption) {
-        // --- SAHI JAWAB ---
-        element.classList.add('correct'); // Green color
-        // Icon badalna (Optional)
-        // element.innerHTML += ' <i class="bi bi-check-circle-fill float-end"></i>';
+        element.classList.add('correct');
     } else {
-        // --- GALAT JAWAB ---
-        element.classList.add('wrong'); // Red color
-        
-        // Sahi wale ko dhund ke Green karo
-        allOptions.forEach(opt => {
+        element.classList.add('wrong');
+        // Auto-show correct answer
+        parent.querySelectorAll('.mcq-option').forEach(opt => {
             if (opt.getAttribute('data-opt') === correctOption) {
                 opt.classList.add('correct');
             }
         });
     }
 
-    // Solution dikhana (Agar solution box maujood hai)
-    if (solutionBox) {
-        solutionBox.style.display = 'block';
-    }
+    if (solutionBox) solutionBox.style.display = 'block';
 }
 
-// 2. FLASHCARD FLIP LOGIC
-// Card par click karne se palti marega
+// 6. FLASHCARD FLIP
 function toggleFlashcard(element) {
-    // 'element' wo hai jis par click hua (.flashcard-inner)
     element.classList.toggle('flipped');
 }
 
-// 3. POST LIKE ANIMATION
-function toggleLike(btnElement) {
-    const icon = btnElement.querySelector('i');
-    const countSpan = btnElement.querySelector('span'); // Agar number hai to
-    
-    // Toggle Class (CSS me .liked class ka color red hai)
-    btnElement.classList.toggle('liked');
-
-    if (btnElement.classList.contains('liked')) {
-        // Liked State (Filled Heart)
-        icon.classList.remove('bi-heart');
-        icon.classList.add('bi-heart-fill');
-        
-        // Number badhao (Fake logic for UI)
-        if(countSpan) {
-            let current = parseInt(countSpan.innerText || 0);
-            countSpan.innerText = " " + (current + 1);
-        }
-    } else {
-        // Unliked State (Outline Heart)
-        icon.classList.remove('bi-heart-fill');
-        icon.classList.add('bi-heart');
-        
-        // Number ghatao
-        if(countSpan) {
-            let current = parseInt(countSpan.innerText || 0);
-            countSpan.innerText = " " + (current > 0 ? current - 1 : 0);
-        }
-    }
-}
-
-// 4. BOOKMARK / SAVE LOGIC
-function toggleSave(btnElement) {
-    const icon = btnElement.querySelector('i');
-    btnElement.classList.toggle('saved');
-
-    if (btnElement.classList.contains('saved')) {
-        icon.classList.remove('bi-bookmark');
-        icon.classList.add('bi-bookmark-fill');
-        // Toast msg dikha sakte hain: "Saved to collection"
-    } else {
-        icon.classList.remove('bi-bookmark-fill');
-        icon.classList.add('bi-bookmark');
-    }
-}
-
-// 5. KEBAB MENU (Open Bottom Sheet)
-// Ye Bootstrap ke Offcanvas ko JS se control karega
+// 7. OPEN MENU
 function openKebabMenu() {
-    const kebabEl = document.getElementById('kebabMenu');
-    const bsOffcanvas = new bootstrap.Offcanvas(kebabEl);
-    bsOffcanvas.show();
-}
-
-/* =========================================
-   HELPER: DUMMY POST GENERATOR (Optional)
-   (Iska use karke hum future me posts load karenge)
-   ========================================= */
-function createQuizHTML(question, optA, optB, optC, optD, correctAns, reason) {
-    return `
-    <div class="custom-card p-3">
-        <div class="d-flex align-items-center mb-2">
-            <img src="assets/user-placeholder.jpg" class="user-avatar-small me-2">
-            <div><h6 class="mb-0 fw-bold">Daily Quiz</h6><small class="text-muted">2 mins ago</small></div>
-        </div>
-        
-        <p class="fw-bold mb-3">${question}</p>
-        
-        <div class="quiz-options-container">
-            <div class="mcq-option" data-opt="A" onclick="checkMCQ(this, 'A', '${correctAns}')">A. ${optA}</div>
-            <div class="mcq-option" data-opt="B" onclick="checkMCQ(this, 'B', '${correctAns}')">B. ${optB}</div>
-            <div class="mcq-option" data-opt="C" onclick="checkMCQ(this, 'C', '${correctAns}')">C. ${optC}</div>
-            <div class="mcq-option" data-opt="D" onclick="checkMCQ(this, 'D', '${correctAns}')">D. ${optD}</div>
-            
-            <div class="solution-content">
-                <div class="solution-box">
-                    <strong>Reason:</strong> ${reason}
-                </div>
-            </div>
-        </div>
-        
-        <div class="d-flex justify-content-between mt-3 px-1 text-secondary post-actions">
-            <span class="action-btn" onclick="toggleLike(this)"><i class="bi bi-heart"></i> 12</span>
-            <span class="action-btn"><i class="bi bi-chat"></i> 4</span>
-            <span class="action-btn" onclick="toggleSave(this)"><i class="bi bi-bookmark"></i></span>
-        </div>
-    </div>
-    `;
+    // Bootstrap Offcanvas instance
+    const el = document.getElementById('kebabMenu');
+    if(el) {
+        const bsOffcanvas = new bootstrap.Offcanvas(el);
+        bsOffcanvas.show();
+    }
 }
