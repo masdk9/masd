@@ -1,1 +1,226 @@
-k
+/* =========================================
+   1. GLOBAL VARIABLES & THEME (Light/Dark)
+   ========================================= */
+:root {
+    /* Main Colors */
+    --primary-color: #007bff;       /* Aapka Blue Color */
+    --secondary-text: #6c757d;      /* Grey Text */
+    --success-color: #198754;       /* Green */
+    --danger-color: #dc3545;        /* Red */
+    
+    /* Backgrounds */
+    --bg-color: #f0f4f8;            /* Halka Grey Background */
+    --card-bg: #ffffff;             /* Card ka White Background */
+    --input-bg: #ffffff;
+    
+    /* Text & Borders */
+    --text-color: #050505;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --primary-color: #3d8bfd;
+    --bg-color: #121212;            /* Black Background */
+    --card-bg: #1e1e1e;             /* Dark Grey Cards */
+    --input-bg: #2c2c2c;
+    --text-color: #e4e6eb;          /* White Text */
+    --secondary-text: #b0b3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   2. BODY & RESET STYLES
+   ========================================= */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding-top: 60px;    /* Header ke liye jagah */
+    padding-bottom: 80px; /* Bottom Nav ke liye jagah */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;    /* Text copy rokne ke liye (App feel) */
+    -webkit-tap-highlight-color: transparent; /* Mobile click color remove */
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* =========================================
+   3. HEADER STYLES (Fixed Top)
+   ========================================= */
+.top-header {
+    height: 60px;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0 15px;
+    z-index: 1030; /* Sabse upar dikhe */
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.app-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+}
+
+.header-icon {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+}
+
+/* Sub-Page Header (Back button wala header) */
+.sub-header-styled {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 60px; /* Header ke theek neeche chipkega */
+    z-index: 1020;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    border-radius: 0 0 12px 12px;
+}
+
+/* =========================================
+   4. BOTTOM NAVIGATION (Fixed Bottom)
+   ========================================= */
+.bottom-nav {
+    background-color: var(--card-bg);
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.05);
+    height: 65px;
+    padding: 0 10px;
+    border-top: 1px solid var(--border-color);
+    z-index: 1030;
+    transition: background-color 0.3s ease;
+}
+
+.nav-item-custom {
+    cursor: pointer;
+    color: var(--secondary-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.nav-item-custom i {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+    transition: transform 0.2s;
+}
+
+.nav-item-custom span {
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: none; /* Inactive hone par text chupa rahega */
+}
+
+/* Active State (Jab tab select ho) */
+.nav-item-custom.active {
+    color: var(--primary-color);
+}
+.nav-item-custom.active i {
+    transform: translateY(-2px); /* Icon thoda upar uthega */
+}
+.nav-item-custom.active span {
+    display: block; /* Text dikhega */
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+/* =========================================
+   5. COMMON UTILITY CLASSES
+   ========================================= */
+/* Generic White Card */
+.custom-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px var(--border-color);
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+/* Small User Avatar (Feed me dikhne wala) */
+.user-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+/* Search Tags */
+.search-tag {
+    background-color: rgba(0, 123, 255, 0.1);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* =========================================
+   6. KEBAB MENU (Bottom Sheet)
+   ========================================= */
+.offcanvas-bottom {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 20px 20px 0 0; /* Upar se gol */
+    border: none;
+    max-height: 50vh;
+}
+
+.menu-handle {
+    width: 50px;
+    height: 5px;
+    background: var(--secondary-text);
+    opacity: 0.3;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.menu-list-item {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.menu-list-item:active { background: var(--bg-color); }
+
+.menu-list-item i {
+    font-size: 1.3rem;
+    margin-right: 15px;
+    color: var(--secondary-text);
+}
+
+.danger-item { color: var(--danger-color) !important; }
+.danger-item i { color: var(--danger-color) !important; }
+
+.menu-cancel-btn {
+    justify-content: center;
+    font-weight: 700;
+    color: var(--secondary-text);
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
