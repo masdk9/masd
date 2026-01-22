@@ -1,1 +1,265 @@
-k
+/* =========================================
+   CREATE POST TOOL STYLES
+   ========================================= */
+
+/* 1. Modal Overlay (Full Screen Mobile View) */
+#create-post-modal {
+    display: none; /* Hidden by default */
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--card-bg); /* main.css se variable */
+    overflow-y: auto;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Modal Animation */
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 2. Text Editor Wrapper & Alignment Rules */
+#text-editor-wrapper {
+    transition: all 0.3s ease;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* RULE 1: Colourless (White/Default) -> Left & Top */
+#text-editor-wrapper.style-clean {
+    background: var(--card-bg);
+    padding-top: 10px;
+    min-height: 150px;
+    border: 1px solid var(--border-color);
+}
+
+#text-editor-wrapper.style-clean textarea {
+    text-align: left !important;
+    color: var(--text-color) !important;
+}
+
+/* RULE 2: Colourful -> Center from All Sides */
+#text-editor-wrapper.style-colorful {
+    display: flex;
+    align-items: center;     /* Vertical Center */
+    justify-content: center; /* Horizontal Center */
+    min-height: 250px;       /* Bada height taaki center feel ho */
+    border: none;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+#text-editor-wrapper.style-colorful textarea {
+    text-align: center !important;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1.5rem; /* Thoda bada text */
+}
+
+/* 3. The Text Area Itself */
+#main-textarea {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    min-height: 100px;
+}
+#main-textarea::placeholder {
+    color: var(--secondary-text);
+    opacity: 0.7;
+}
+/* Colorful mode me placeholder white hona chahiye */
+.style-colorful #main-textarea::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+}
+
+/* 4. Color Picker (Bubbles) */
+.quick-palette {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    overflow-x: auto;
+    padding: 5px 2px;
+    scrollbar-width: none; /* Scrollbar chupana */
+}
+
+.color-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.color-circle.active-circle {
+    transform: scale(1.2);
+    border-color: var(--text-color) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Gradient Button (Eye Dropper) */
+.picker-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+/* 5. Extended Color Picker (Hidden Grid) */
+#extended-picker {
+    display: none; /* JS se open hoga */
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.picker-tabs {
+    display: flex;
+    background: var(--card-bg);
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--secondary-text);
+}
+.tab-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.grid-item {
+    width: 100%;
+    padding-top: 100%; /* Square aspect ratio */
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* 6. Chip Buttons (Post Type Selectors) */
+.chip-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.chip-btn {
+    padding: 10px 0;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-text);
+    transition: 0.2s;
+}
+
+.chip-btn i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.chip-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+.chip-btn.active i {
+    color: #fff !important;
+}
+
+/* 7. Dynamic Inputs (Quiz/Poll Fields) */
+#dynamic-input-area {
+    margin-bottom: 15px;
+    animation: fadeIn 0.2s;
+}
+
+.cp-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+.cp-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Upload Box Style */
+.upload-box {
+    border: 2px dashed var(--secondary-text);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    color: var(--secondary-text);
+    background: var(--bg-color);
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.upload-box i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Quiz Radio Buttons */
+.quiz-opt-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.quiz-radio {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--success-color); /* Green for correct answer */
+    cursor: pointer;
+}
