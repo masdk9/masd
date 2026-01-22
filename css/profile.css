@@ -1,1 +1,278 @@
-k
+/* =========================================
+   PROFILE PAGE STYLES
+   ========================================= */
+
+/* 1. Main Profile Card (Photo & Stats) */
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+/* Profile Picture Wrapper */
+.img-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+}
+
+.profile-pic-big {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-color); /* Background se match karega */
+}
+
+/* Edit Pencil Icon (Tiny) */
+.edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--card-bg);
+    font-size: 14px;
+}
+
+/* User Info Text */
+.user-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--text-color);
+}
+
+.user-handle {
+    font-size: 14px;
+    color: var(--secondary-text);
+    margin-bottom: 25px;
+}
+
+/* Stats Row (Posts, Followers, Following) */
+.stats-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.stat-item {
+    cursor: pointer;
+}
+
+.stat-num {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* 2. Menu List (Settings, Edit, etc.) */
+.menu-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    color: var(--text-color);
+    transition: background 0.2s;
+}
+.menu-item:active { background: var(--bg-color); }
+.menu-item:last-child { border-bottom: none; }
+
+.menu-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 123, 255, 0.1);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.menu-text {
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+}
+
+.chevron {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+/* Logout Button */
+.btn-logout {
+    width: auto;
+    min-width: 150px;
+    padding: 12px 40px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    background: var(--danger-color);
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+/* =========================================
+   SETTINGS PAGE & TOGGLES
+   ========================================= */
+.section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--secondary-text);
+    margin: 20px 0 8px 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-group {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.item {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--card-bg);
+    cursor: pointer;
+}
+.item:last-child { border-bottom: none; }
+
+.item-left { display: flex; align-items: center; gap: 15px; }
+.item-icon { width: 24px; color: var(--text-color); font-size: 18px; text-align: center; }
+.item-title { font-size: 16px; font-weight: 500; color: var(--text-color); }
+
+/* Toggle Switch Design */
+.toggle {
+    width: 44px;
+    height: 24px;
+    background: var(--secondary-text);
+    border-radius: 20px;
+    position: relative;
+    transition: 0.3s;
+    opacity: 0.4;
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Active Toggle State */
+.item.active .toggle {
+    background: var(--primary-color);
+    opacity: 1;
+}
+.item.active .toggle::after {
+    transform: translateX(20px);
+}
+
+/* =========================================
+   EDIT PROFILE PAGE
+   ========================================= */
+.edit-dp-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 10px auto 30px;
+    position: relative;
+}
+
+.edit-dp-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--card-bg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.edit-cam-badge {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    background: var(--primary-color);
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--card-bg);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.btn-update-profile {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Dark Mode Fixes for Inputs */
+/* Ye code ensure karta hai ki dark mode me input transparent dikhe */
+#account-center .form-floating > .form-control {
+    background-color: transparent !important;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+#account-center .form-floating > label {
+    background-color: transparent !important;
+    color: var(--secondary-text);
+}
+#account-center .form-floating > .form-control:focus ~ label {
+    color: var(--primary-color) !important;
+    background-color: var(--card-bg) !important;
+    padding: 0 5px;
+}
