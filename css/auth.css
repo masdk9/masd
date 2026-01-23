@@ -1,6 +1,4 @@
-/* =========================================
-   AUTHENTICATION PAGE STYLES
-   ========================================= */
+/* === AUTHENTICATION PAGE STYLES ==== */
 
 /* 1. Main Container (Full Screen) */
 #auth-container {
@@ -21,49 +19,39 @@
     border-radius: 20px;
     padding: 30px 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Halka shadow */
-    animation: fadeIn 0.4s ease-in-out;
-}
+    animation: fadeIn 0.4s ease-in-out; }
 
 /* 3. Typography */
 .auth-view h1, 
 .auth-view h2 {
-    letter-spacing: -0.5px;
-}
+    letter-spacing: -0.5px; }
 
 .auth-view p {
-    font-size: 0.95rem;
-}
+    font-size: 0.95rem; }
 
 /* 4. Form Inputs Tweaks (Bootstrap Overrides) */
 .form-floating > .form-control {
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    background-color: var(--input-bg);
-}
+    background-color: var(--input-bg); }
 
 .form-floating > .form-control:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-}
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1); }
 
 /* 5. Buttons */
 .btn-primary {
     background-color: var(--primary-color);
     border: none;
-    transition: transform 0.2s;
-}
+    transition: transform 0.2s;}
 
-.btn-primary:active {
-    transform: scale(0.98); /* Click karne par halka dabega */
-}
+.btn-primary:active { transform: scale(0.98); /* Click karne par halka dabega */ }
 
 /* 6. Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    to { opacity: 1; transform: translateY(0); } }
 
 /* 7. Dark Mode Support specifically for Auth */
 [data-theme="dark"] #auth-container {
-    background-color: #000; /* Dark mode me background black */
-}
+    background-color: #000; /* Dark mode me background black */ }
