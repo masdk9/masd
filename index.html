@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- ====================== HEAD SECTION ====================== -->
+    <!-- Meta tags, title, and all external CSS links -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shahpathi</title>
     
+    <!-- Bootstrap CSS & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
+    <!-- Custom CSS Files -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/feed.css">
@@ -15,17 +20,22 @@
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/study.css">
 </head>
+
 <body data-theme="light">
 
+    <!-- ====================== AUTHENTICATION CONTAINER ====================== -->
+    <!-- Login & Signup Views -->
     <div id="auth-container">
-        <div id="login-view" class="auth-view">
-            <h2 class="mb-4 fw-bold">Login</h2>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="login-email" placeholder="name@example.com">
-                <label>Email address</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="login-pass" placeholder="Password">
+        
+<!-- Login View -->
+<div id="login-view" class="auth-view">
+<h2 class="mb-4 fw-bold">Login</h2>
+<div class="form-floating mb-3">
+<input type="email" class="form-control" id="login-email" placeholder="name@example.com">
+<label>Email address</label>
+</div>
+<div class="form-floating mb-3">
+<input type="password" class="form-control" id="login-pass" placeholder="Password">
                 <label>Password</label>
             </div>
             <button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleLogin()">Log In</button>
@@ -34,6 +44,7 @@
             </p>
         </div>
 
+        <!-- Signup View -->
         <div id="signup-view" class="auth-view" style="display: none;">
             <h2 class="mb-4 fw-bold">Sign Up</h2>
             <div class="form-floating mb-3">
@@ -55,8 +66,11 @@
         </div>
     </div>
 
+    <!-- ====================== MAIN APP CONTAINER ====================== -->
+    <!-- Shown after successful login -->
     <div id="app-container" style="display: none;">
         
+        <!-- Top Header (Logo + Messages Icon) -->
         <div class="top-header d-flex align-items-center justify-content-between">
             <div class="app-logo">Shahpathi</div>
             <div class="d-flex gap-3">
@@ -64,8 +78,10 @@
             </div>
         </div>
 
+        <!-- ====================== HOME / FEED SECTION ====================== -->
         <div id="home" class="content-section" style="display: block; padding: 15px; padding-bottom: 80px;">
             
+            <!-- Create Post Input Area -->
             <div class="custom-card p-3 d-flex align-items-center" onclick="openCreatePostModal()">
                 <img id="my-avatar-small" src="assets/user-placeholder.jpg" class="user-avatar-small me-3">
                 <div style="background: var(--bg-color); flex: 1; padding: 10px 15px; border-radius: 20px; color: var(--secondary-text);">
@@ -73,6 +89,7 @@
                 </div>
             </div>
 
+            <!-- Welcome System Post -->
             <div class="custom-card p-3">
                 <div class="d-flex align-items-center mb-2">
                     <img src="assets/bot.png" class="user-avatar-small me-2" onerror="this.src='assets/user-placeholder.jpg'">
@@ -89,6 +106,7 @@
                 </div>
             </div>
 
+            <!-- All Posts will be loaded here -->
             <div id="feed-container">
                 <div class="text-center mt-5 text-muted">
                     <div class="spinner-border text-primary" role="status"></div>
@@ -97,6 +115,7 @@
             </div>
         </div>
 
+        <!-- ====================== SEARCH SECTION ====================== -->
         <div id="search" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
             <input type="text" class="form-control py-3 mb-3" placeholder="Search topics, exams..." style="border-radius: 12px;">
             <h6 class="text-muted fw-bold mb-3">TRENDING</h6>
@@ -108,8 +127,10 @@
             </div>
         </div>
 
+        <!-- ====================== STUDY SECTION ====================== -->
         <div id="study" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
             
+            <!-- Main Study Grid -->
             <div id="study-main-grid">
                 <h6 class="studytabtitle">RESOURCES</h6>
                 <div class="row g-2 mb-4">
@@ -120,16 +141,19 @@
                 </div>
             </div>
 
+            <!-- Notes Sub-view -->
             <div id="notes-view" class="study-sub-view">
                 <div class="sub-header-styled" onclick="closeStudySubView()"><i class="bi bi-arrow-left me-3"></i> Back to Study</div>
                 <div id="notes-list-container" class="mt-3"></div>
             </div>
         </div>
 
+        <!-- ====================== ALERTS / NOTIFICATIONS SECTION ====================== -->
         <div id="alerts" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
             <h6 class="text-center text-muted mt-5">No new notifications</h6>
         </div>
 
+        <!-- ====================== PROFILE SECTION ====================== -->
         <div id="profile" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
             <div class="profile-card">
                 <div class="img-wrap">
@@ -162,6 +186,7 @@
             <button class="btn-logout" onclick="handleLogout()">Log Out</button>
         </div>
 
+        <!-- ====================== BOTTOM NAVIGATION BAR ====================== -->
         <div class="bottom-nav fixed-bottom d-flex justify-content-between align-items-center">
             <div class="nav-item-custom active" onclick="openTab('home', this)">
                 <i class="bi bi-house-door-fill"></i><span>Home</span>
@@ -179,7 +204,10 @@
                 <i class="bi bi-person-fill"></i><span>Profile</span>
             </div>
         </div>
-    </div> <div id="create-post-modal">
+    </div>
+
+    <!-- ====================== CREATE POST MODAL ====================== -->
+    <div id="create-post-modal">
         <div class="d-flex align-items-center justify-content-between p-3 border-bottom bg-white">
             <i class="bi bi-x-lg fs-4" onclick="closeCreatePostModal()"></i>
             <h5 class="m-0 fw-bold">Create Post</h5>
@@ -213,6 +241,7 @@
         </div>
     </div>
 
+    <!-- ====================== APP SETTINGS PAGE ====================== -->
     <div id="app-settings" class="content-section" style="display: none; padding-bottom: 20px; background: var(--bg-color); min-height: 100vh;">
         <div class="sub-header-styled ps-2" onclick="closeSubPage()"><i class="bi bi-arrow-left p-2 fs-4"></i> <span class="fs-5 fw-bold">Settings</span></div>
         <div class="section-label">Appearance</div>
@@ -224,6 +253,7 @@
         </div>
     </div>
 
+    <!-- ====================== EDIT PROFILE PAGE ====================== -->
     <div id="account-center" class="content-section" style="display: none; padding-bottom: 20px; background: var(--bg-color); min-height: 100vh;">
         <div class="sub-header-styled ps-2" onclick="closeSubPage()"><i class="bi bi-arrow-left p-2 fs-4"></i> <span class="fs-5 fw-bold">Edit Profile</span></div>
         <div class="p-3">
@@ -243,6 +273,7 @@
         </div>
     </div>
 
+    <!-- ====================== POST OPTIONS BOTTOM SHEET ====================== -->
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="kebabMenu">
         <div class="offcanvas-header pb-0"><div class="menu-handle"></div></div>
         <div class="offcanvas-body pt-2">
@@ -252,13 +283,18 @@
         </div>
     </div>
 
+    <!-- ====================== EXTERNAL SCRIPTS ====================== -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="js/firebase-cfg.js"></script> <script src="js/auth.js"></script>
+    <!-- Custom JS Files -->
+    <script src="js/firebase-cfg.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
     <script src="js/feed.js"></script>
     <script src="js/create.js"></script>
