@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- ====================== HEAD SECTION ====================== -->
+<!-- ====================== HEAD SECTION ====================== -->
     <!-- Meta tags, title, and all external CSS links -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -24,8 +24,8 @@
 <body data-theme="light">
 
     <!-- ====================== AUTHENTICATION CONTAINER ====================== -->
-    <!-- Login & Signup Views -->
-    <div id="auth-container">
+ <!-- Login & Signup Views -->
+ <div id="auth-container">
         
 <!-- Login View -->
 <div id="login-view" class="auth-view">
@@ -36,11 +36,11 @@
 </div>
 <div class="form-floating mb-3">
 <input type="password" class="form-control" id="login-pass" placeholder="Password">
-                <label>Password</label>
-            </div>
-            <button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleLogin()">Log In</button>
-            <p class="text-center text-secondary">
-                New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('signup')">Create Account</span>
+<label>Password</label>
+</div>
+<button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleLogin()">Log In</button>
+<p class="text-center text-secondary">
+New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('signup')">Create Account</span>
             </p>
         </div>
 
@@ -265,19 +265,19 @@
                 <input type="text" class="form-control" id="edit-name" placeholder="Name">
                 <label>Display Name</label>
             </div>
-            <div class="form-floating mb-4">
-                <textarea class="form-control" id="edit-bio" placeholder="Bio" style="height: 100px"></textarea>
-                <label>Bio (About you)</label>
+ <div class="form-floating mb-4">
+ <textarea class="form-control" id="edit-bio" placeholder="Bio" style="height: 100px"></textarea>
+ <label>Bio (About you)</label>
             </div>
-            <button class="btn-update-profile" onclick="saveProfileChange()">Save Changes</button>
-        </div>
-    </div>
+ <button class="btn-update-profile" onclick="saveProfileChange()">Save Changes</button>
+ </div>
+ </div>
 
-    <!-- ====================== POST OPTIONS BOTTOM SHEET ====================== -->
-    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="kebabMenu">
-        <div class="offcanvas-header pb-0"><div class="menu-handle"></div></div>
-        <div class="offcanvas-body pt-2">
-            <div class="menu-list-item"><i class="bi bi-exclamation-circle"></i> Report Post</div>
+<!--==== POST OPTIONS BOTTOM SHEET ===-->
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="kebabMenu">
+<div class="offcanvas-header pb-0"><div class="menu-handle"></div></div>
+<div class="offcanvas-body pt-2">
+<div class="menu-list-item"><i class="bi bi-exclamation-circle"></i> Report Post</div>
             <div class="menu-list-item"><i class="bi bi-person-plus"></i> Follow Author</div>
             <div class="menu-list-item danger-item"><i class="bi bi-slash-circle"></i> Block User</div>
         </div>
@@ -286,20 +286,20 @@
     <!-- ====================== EXTERNAL SCRIPTS ====================== -->
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JS Files -->
-    <script src="js/firebase-cfg.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/feed.js"></script>
-    <script src="js/create.js"></script>
-    <script src="js/profile.js"></script>
-    <script src="js/study.js"></script>
+<!-- Custom JS Files -->
+<script src="js/firebase-cfg.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/feed.js"></script>
+<script src="js/create.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/study.js"></script>
 
 </body>
 </html>
