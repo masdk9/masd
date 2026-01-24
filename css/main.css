@@ -78,23 +78,51 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* =========================================
-   FIXED HEADER CSS (Replace karein)
+   4. HEADER STYLES (MAIN & UNIVERSAL)
    ========================================= */
 
-/* Top Header Fixed */
-.top-header { height: 60px; 
+/* A. MAIN HOME HEADER */
+.top-header { 
+    height: 60px; 
     background-color: var(--card-bg); 
     box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
-    padding: 0 15px;  z-index: 1000; 
+    padding: 0 15px;  
+    z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
-/* App Logo Style */
 .app-logo { font-size: 1.6rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+.header-icon { font-size: 1.5rem; cursor: pointer; position: relative; }
 
-/* Header Icons */
-.header-icon {  font-size: 1.5rem; cursor: pointer;   position: relative; }
+/* B. UNIVERSAL DYNAMIC HEADER (NEW FIX) */
+.universal-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--card-bg); /* Auto-changes in Dark Mode */
+    color: var(--text-color);
+    z-index: 2000; /* Always on top of Main Header */
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: background-color 0.3s ease;
+}
 
+.universal-header i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 15px;
+    cursor: pointer;
+}
 
+.universal-header h5 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--text-color);
+}
 
 /* =========================================
    5. BOTTOM NAVIGATION (FIXED BOTTOM)
@@ -165,7 +193,7 @@ a { text-decoration: none; color: inherit; }
 /* Search Tags */
 .search-tag {
     background-color: rgba(0, 123, 255, 0.1);
-    border: 1px solid rgba(0, 123, 255, 0.2);
+    border: 1px solid var(--border-color);
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -174,6 +202,7 @@ a { text-decoration: none; color: inherit; }
     font-weight: 600;
     display: inline-block;
     transition: background 0.2s;
+    margin-bottom: 5px;
 }
 .search-tag:active { background-color: rgba(0, 123, 255, 0.2); }
 
@@ -210,53 +239,51 @@ a { text-decoration: none; color: inherit; }
 .offcanvas-header .btn-close {
     filter: invert(var(--invert-value, 0)); /* Auto adjust close icon */
 }
+/* Dark mode close button invert */
 [data-theme="dark"] .btn-close { filter: invert(1); }
 
-
-
-/* ==== 8. KEBAB MENU ====== */
-
+/* =========================================
+   8. KEBAB MENU & EXTRAS
+   ========================================= */
 .menu-handle { 
-width: 100px; 
-height: 4px; 
-background: #cfd9de; 
-border-radius: 4px; 
-margin: 0 auto; }
+    width: 100px; 
+    height: 4px; 
+    background: #cfd9de; 
+    border-radius: 4px; 
+    margin: 0 auto; 
+}
 
 .menu-list-item { 
-padding: 12px 20px; 
-display: flex; 
-align-items: center; 
-color: var(--text-color); 
-font-size: 15px; 
-font-weight: 500; 
-cursor: pointer; }
+    padding: 12px 20px; 
+    display: flex; 
+    align-items: center; 
+    color: var(--text-color); 
+    font-size: 15px; 
+    font-weight: 500; 
+    cursor: pointer; 
+}
 
 .menu-list-item i { 
-font-size: 1.3rem; 
-margin-right: 15px; 
-color: var(--secondary-text); }
+    font-size: 1.3rem; 
+    margin-right: 15px; 
+    color: var(--secondary-text); 
+}
 
 .menu-list-item.danger-item { color: #f4212e; } 
-
 .menu-list-item.danger-item i { color: #f4212e; }
 
-.menu-divider { 
-border-top: 1px solid var(--border-color); 
-margin: 4px 0; }
-
-.menu-divider-thick { 
-border-top: 6px solid var(--bg-color); 
-margin: 8px 0; }
+.menu-divider { border-top: 1px solid var(--border-color); margin: 4px 0; }
+.menu-divider-thick { border-top: 6px solid var(--bg-color); margin: 8px 0; }
 
 .menu-cancel-btn { 
-justify-content: center; 
-font-weight: 700; 
-padding-top: 15px; }
+    justify-content: center; 
+    font-weight: 700; 
+    padding-top: 15px; 
+}
 
 .offcanvas-bottom { 
-height: auto !important; 
-max-height: 75vh; 
-border-top-left-radius: 20px; 
-border-top-right-radius: 20px; }
-.search-tag { background-color: #e7f1ff; border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--primary-color); cursor: pointer; font-weight: 500; }
+    height: auto !important; 
+    max-height: 75vh; 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+}
