@@ -1,92 +1,142 @@
-/* == 1. GLOBAL VARIABLES & THEME ==== */
+/* =========================================
+   1. GLOBAL VARIABLES & THEME
+   ========================================= */
 :root {
-
     /* Main Colors */
---primary-color: #007bff;       /* Aapka Blue Color */
---secondary-text: #6c757d;   /* Grey Text */
---success-color: #198754;    /* Green */
---danger-color: #dc3545;      /* Red */
+    --primary-color: #007bff;       /* App Blue */
+    --primary-hover: #0056b3;
+    --secondary-text: #6c757d;      /* Grey Text */
+    --success-color: #198754;
+    --danger-color: #dc3545;
     
     /* Backgrounds */
---bg-color: #f0f4f8;       /* Halka Grey Background */
---card-bg: #ffffff;         /* Card ka White Background */
---input-bg: #ffffff;
+    --bg-color: #f0f4f8;            /* Light App Background */
+    --card-bg: #ffffff;             /* White Card */
+    --input-bg: #ffffff;
+    --modal-bg: #ffffff;
     
     /* Text & Borders */
---text-color: #050505;
---border-color: rgba(0, 0, 0, 0.1); }
+    --text-color: #050505;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+}
 
 /* DARK MODE OVERRIDES */
 [data-theme="dark"] {
---primary-color: #3d8bfd;
---bg-color: #121212;            /* Black Background */
---card-bg: #1e1e1e;             /* Dark Grey Cards */
---input-bg: #2c2c2c;
---text-color: #e4e6eb;          /* White Text */
---secondary-text: #b0b3b8;
---border-color: rgba(255, 255, 255, 0.1); }
+    --primary-color: #3d8bfd;
+    --primary-hover: #6ea8fe;
+    --bg-color: #121212;            /* True Black */
+    --card-bg: #1e1e1e;             /* Dark Grey Cards */
+    --input-bg: #2c2c2c;
+    --modal-bg: #1e1e1e;
+    --text-color: #e4e6eb;          /* Off-White Text */
+    --secondary-text: #b0b3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-sm: none;
+}
 
-/* ==== 2. BODY & RESET STYLES ====== */
+/* =========================================
+   2. BODY & RESET
+   ========================================= */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding-top: 60px;    /* Header ke liye jagah */
-  padding-bottom: 80px; /* Bottom Nav ke liye jagah */
-  transition: background-color 0.3s ease, color 0.3s ease;
-    user-select: none;    /* Text copy rokne ke liye (App feel) */
-    -webkit-tap-highlight-color: transparent; /* Mobile click color remove */ }
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding-top: 60px;    /* Top Header Height */
+    padding-bottom: 80px; /* Bottom Nav Height */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;    /* App-like feel (no text selection) */
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+}
 
 a { text-decoration: none; color: inherit; }
 
-/* ==== 3. HEADER STYLES (Fixed Top) ===== */
+/* Custom Scrollbar for nicer look */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--secondary-text); border-radius: 10px; opacity: 0.5; }
+
+/* =========================================
+   3. SPA LOGIC (CRITICAL FOR TABS)
+   ========================================= */
+/* Default: Hide all sections */
+.content-section {
+    display: none;
+    animation: fadeInPage 0.3s ease-out;
+}
+
+/* Default: Show Home only (JS handles the rest) */
+#home {
+    display: block;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   4. HEADER STYLES (FIXED TOP)
+   ========================================= */
 .top-header {
     height: 60px;
     background-color: var(--card-bg);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
     padding: 0 15px;
-    z-index: 1030; /* Sabse upar dikhe */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
     border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.3s ease; }
+    transition: background-color 0.3s ease;
+}
 
 .app-logo {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--primary-color);
-    letter-spacing: -0.5px; }
+    letter-spacing: -0.5px;
+}
 
 .header-icon {
     font-size: 1.4rem;
     color: var(--text-color);
     cursor: pointer;
-    position: relative;
-    padding: 5px; }
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+.header-icon:active { background-color: var(--bg-color); }
 
-/* Sub-Page Header (Back button wala header) */
+/* Sub-Page Header (Back button style) */
 .sub-header-styled {
     height: 60px;
     display: flex;
     align-items: center;
-    padding: 0 5px;
+    padding: 0 10px;
     background-color: var(--card-bg);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
-    top: 60px; /* Header ke theek neeche chipkega */
+    top: 60px;
     z-index: 1020;
     color: var(--text-color);
-    margin-bottom: 10px;
-    border-radius: 0 0 12px 12px;}
+    cursor: pointer;
+}
 
-/* == 4. BOTTOM NAVIGATION (Fixed Bottom) === */
+/* =========================================
+   5. BOTTOM NAVIGATION (FIXED BOTTOM)
+   ========================================= */
 .bottom-nav {
     background-color: var(--card-bg);
     box-shadow: 0 -1px 10px rgba(0,0,0,0.05);
     height: 65px;
-    padding: 0 10px;
+    padding: 0 5px;
     border-top: 1px solid var(--border-color);
-    z-index: 1030;
-    transition: background-color 0.3s ease; }
+    z-index: 1040; /* High Z-Index to ensure clickability */
+    transition: background-color 0.3s ease;
+}
 
 .nav-item-custom {
     cursor: pointer;
@@ -95,76 +145,119 @@ a { text-decoration: none; color: inherit; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    width: 20%; /* 5 icons = 20% each */
     height: 100%;
-    transition: all 0.2s ease; }
+    position: relative;
+    transition: all 0.2s ease;
+}
 
 .nav-item-custom i {
     font-size: 1.4rem;
     margin-bottom: 2px;
-    transition: transform 0.2s; }
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
 .nav-item-custom span {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    display: none; /* Inactive hone par text chupa rahega */ }
+    display: none; 
+}
 
-/* Active State (Jab tab select ho) */
-.nav-item-custom.active {
-    color: var(--primary-color); }
-.nav-item-custom.active i {
-    transform: translateY(-2px); /* Icon thoda upar uthega */ }
-.nav-item-custom.active span {
-    display: block; /* Text dikhega */
-    animation: fadeIn 0.3s; }
+/* Active State Animation */
+.nav-item-custom.active { color: var(--primary-color); }
+.nav-item-custom.active i { transform: translateY(-3px); }
+.nav-item-custom.active span { display: block; animation: fadeText 0.3s; }
 
-@keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeText { from { opacity: 0; } to { opacity: 1; } }
 
-/* === 5. COMMON UTILITY CLASSES ===== */
-/* Generic White Card */
+/* =========================================
+   6. COMMON COMPONENTS (CARDS, TAGS)
+   ========================================= */
 .custom-card {
     background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 1px 2px var(--border-color);
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
     margin-bottom: 15px;
-    transition: background-color 0.3s ease; }
+    transition: background-color 0.3s ease;
+}
 
-/* Small User Avatar (Feed me dikhne wala) */
+/* User Avatar Small */
 .user-avatar-small {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--border-color); }
+    border: 1px solid var(--border-color);
+}
 
 /* Search Tags */
 .search-tag {
     background-color: rgba(0, 123, 255, 0.1);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 123, 255, 0.2);
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.85rem;
     color: var(--primary-color);
     cursor: pointer;
-    font-weight: 500; }
+    font-weight: 600;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.search-tag:active { background-color: rgba(0, 123, 255, 0.2); }
 
-/* ===6. KEBAB MENU (Bottom Sheet)==== */
-.offcanvas-bottom {
+/* =========================================
+   7. BOOTSTRAP OVERRIDES (FOR DARK MODE)
+   ========================================= */
+/* Inputs */
+.form-control {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+/* Placeholders need explicit color in dark mode */
+.form-control::placeholder { color: var(--secondary-text); }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+}
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+/* Modal / Offcanvas Backgrounds */
+.offcanvas, .modal-content {
     background-color: var(--card-bg);
     color: var(--text-color);
-    border-radius: 20px 20px 0 0; /* Upar se gol */
+}
+.offcanvas-header .btn-close {
+    filter: invert(var(--invert-value, 0)); /* Auto adjust close icon */
+}
+[data-theme="dark"] .btn-close { filter: invert(1); }
+
+/* =========================================
+   8. MENU & BOTTOM SHEET
+   ========================================= */
+.offcanvas-bottom {
+    border-radius: 20px 20px 0 0;
     border: none;
-    max-height: 50vh; }
+    max-height: 50vh;
+}
 
 .menu-handle {
-    width: 50px;
-    height: 5px;
+    width: 40px;
+    height: 4px;
     background: var(--secondary-text);
-    opacity: 0.3;
+    opacity: 0.4;
     border-radius: 10px;
-    margin: 0 auto; }
+    margin: 0 auto;
+}
 
 .menu-list-item {
     padding: 15px 20px;
@@ -173,21 +266,9 @@ a { text-decoration: none; color: inherit; }
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.2s; }
-    
+}
 .menu-list-item:active { background: var(--bg-color); }
-
-.menu-list-item i {
-    font-size: 1.3rem;
-    margin-right: 15px;
-    color: var(--secondary-text); }
+.menu-list-item i { font-size: 1.3rem; margin-right: 15px; color: var(--secondary-text); }
 
 .danger-item { color: var(--danger-color) !important; }
 .danger-item i { color: var(--danger-color) !important; }
-
-.menu-cancel-btn {
-    justify-content: center;
-    font-weight: 700;
-    color: var(--secondary-text);
-    border-top: 1px solid var(--border-color);
-    margin-top: 10px; }
