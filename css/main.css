@@ -78,52 +78,35 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* =========================================
-   4. HEADER STYLES (FIXED TOP)
+   FIXED HEADER CSS (Replace karein)
    ========================================= */
+
 .top-header {
-    height: 60px;
-    background-color: var(--card-bg);
-    box-shadow: var(--shadow-sm);
-    padding: 0 15px;
-    position: fixed;
+    position: fixed;        /* Screen ke top par chipkane ke liye */
     top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1030;
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.3s ease;
-}
-
-.app-logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    letter-spacing: -0.5px;
-}
-
-.header-icon {
-    font-size: 1.4rem;
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background 0.2s;
-}
-.header-icon:active { background-color: var(--bg-color); }
-
-/* Sub-Page Header (Back button style) */
-.sub-header-styled {
     height: 60px;
+    
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    z-index: 1050;          /* Sabse upar rakhne ke liye */
+    border-bottom: 1px solid var(--border-color);
+    
+    /* Layout Alignment */
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    background-color: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 60px;
-    z-index: 1020;
-    color: var(--text-color);
-    cursor: pointer;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-sizing: border-box; /* Padding ki wajah se width kharab na ho */
 }
+
+/* Body me padding zaruri hai taaki content header ke peeche na chupe */
+body {
+    padding-top: 70px; /* Header height (60px) + thoda gap (10px) */
+    padding-bottom: 80px;
+}
+
 
 /* =========================================
    5. BOTTOM NAVIGATION (FIXED BOTTOM)
