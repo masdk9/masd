@@ -224,34 +224,51 @@ body {
 }
 [data-theme="dark"] .btn-close { filter: invert(1); }
 
-/* =========================================
-   8. MENU & BOTTOM SHEET
-   ========================================= */
-.offcanvas-bottom {
-    border-radius: 20px 20px 0 0;
-    border: none;
-    max-height: 50vh;
-}
 
-.menu-handle {
-    width: 40px;
-    height: 4px;
-    background: var(--secondary-text);
-    opacity: 0.4;
-    border-radius: 10px;
-    margin: 0 auto;
-}
 
-.menu-list-item {
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-}
-.menu-list-item:active { background: var(--bg-color); }
-.menu-list-item i { font-size: 1.3rem; margin-right: 15px; color: var(--secondary-text); }
+/* ==== 8. KEBAB MENU ====== */
 
-.danger-item { color: var(--danger-color) !important; }
-.danger-item i { color: var(--danger-color) !important; }
+.menu-handle { 
+width: 100px; 
+height: 4px; 
+background: #cfd9de; 
+border-radius: 4px; 
+margin: 0 auto; }
+
+.menu-list-item { 
+padding: 12px 20px; 
+display: flex; 
+align-items: center; 
+color: var(--text-color); 
+font-size: 15px; 
+font-weight: 500; 
+cursor: pointer; }
+
+.menu-list-item i { 
+font-size: 1.3rem; 
+margin-right: 15px; 
+color: var(--secondary-text); }
+
+.menu-list-item.danger-item { color: #f4212e; } 
+
+.menu-list-item.danger-item i { color: #f4212e; }
+
+.menu-divider { 
+border-top: 1px solid var(--border-color); 
+margin: 4px 0; }
+
+.menu-divider-thick { 
+border-top: 6px solid var(--bg-color); 
+margin: 8px 0; }
+
+.menu-cancel-btn { 
+justify-content: center; 
+font-weight: 700; 
+padding-top: 15px; }
+
+.offcanvas-bottom { 
+height: auto !important; 
+max-height: 75vh; 
+border-top-left-radius: 20px; 
+border-top-right-radius: 20px; }
+.search-tag { background-color: #e7f1ff; border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--primary-color); cursor: pointer; font-weight: 500; }
