@@ -81,31 +81,19 @@ a { text-decoration: none; color: inherit; }
    FIXED HEADER CSS (Replace karein)
    ========================================= */
 
-.top-header {
-    position: fixed;        /* Screen ke top par chipkane ke liye */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    
-    background-color: var(--card-bg);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    z-index: 1050;          /* Sabse upar rakhne ke liye */
-    border-bottom: 1px solid var(--border-color);
-    
-    /* Layout Alignment */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    box-sizing: border-box; /* Padding ki wajah se width kharab na ho */
+/* Top Header Fixed */
+.top-header { height: 60px; 
+    background-color: var(--card-bg); 
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
+    padding: 0 15px;  z-index: 1000; 
 }
 
-/* Body me padding zaruri hai taaki content header ke peeche na chupe */
-body {
-    padding-top: 70px; /* Header height (60px) + thoda gap (10px) */
-    padding-bottom: 80px;
-}
+/* App Logo Style */
+.app-logo { font-size: 1.6rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+
+/* Header Icons */
+.header-icon {  font-size: 1.5rem; cursor: pointer;   position: relative; }
+
 
 
 /* =========================================
