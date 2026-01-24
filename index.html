@@ -2,444 +2,334 @@
 <html lang="en">
 
 <head>
-<!-- === HEAD SECTION ===== -->
-<!-- Meta tags, title, and all external CSS links -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Shahpathi</title>
-    
- <!-- Bootstrap CSS & Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-<!-- Custom CSS Files -->
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/auth.css">
-<link rel="stylesheet" href="css/feed.css">
-<link rel="stylesheet" href="css/create.css">
-<link rel="stylesheet" href="css/profile.css">
-<link rel="stylesheet" href="css/study.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shahpathi</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/feed.css">
+    <link rel="stylesheet" href="css/create.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/study.css">
 </head>
 
 <body data-theme="light">
 
-<!-- ==== AUTHENTICATION CONTAINER ==== -->
-<!-- Login & Signup Views -->
-<div id="auth-container">
-        
-<!-- Login View -->
-<div id="login-view" class="auth-view">
-<h2 class="mb-4 fw-bold">Login</h2>
-<div class="form-floating mb-3">
-<input type="email" class="form-control" id="login-email" placeholder="name@example.com">
-<label>Email address</label>
-</div>
-<div class="form-floating mb-3">
-<input type="password" class="form-control" id="login-pass" placeholder="Password">
-<label>Password</label>
-</div>
-<button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleLogin()">Log In</button>
-<p class="text-center text-secondary">
-New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('signup')">Create Account</span>
-</p>
-</div>
+    <div id="dynamic-header" class="universal-header" style="display: none;">
+        <i class="bi bi-arrow-left" onclick="closeSubPage()"></i>
+        <h5 id="dynamic-header-title">Details</h5>
+    </div>
 
-<!-- Signup View -->
-<div id="signup-view" class="auth-view" style="display: none;">
-<h2 class="mb-4 fw-bold">Sign Up</h2>
-<div class="form-floating mb-3">
-<input type="text" class="form-control" id="signup-name" placeholder="Full Name">
-<label>Full Name</label>
-</div>
-<div class="form-floating mb-3">
-<input type="email" class="form-control" id="signup-email" placeholder="name@example.com">
-<label>Email address</label>
-</div>
-<div class="form-floating mb-3">
-<input type="password" class="form-control" id="signup-pass" placeholder="Password">
-<label>Password</label>
-</div>
-<button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleSignup()">Sign Up</button>
-<p class="text-center text-secondary">Already have an account? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('login')">Log In</span></p>
-</div></div>
+    <div id="auth-container">
 
+        <div id="login-view" class="auth-view">
+            <h2 class="mb-4 fw-bold">Login</h2>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="login-email" placeholder="name@example.com">
+                <label>Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="login-pass" placeholder="Password">
+                <label>Password</label>
+            </div>
+            <button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleLogin()">Log In</button>
+            <p class="text-center text-secondary">
+                New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('signup')">Create Account</span>
+            </p>
+        </div>
 
-
-
-<!-- === MAIN APP CONTAINER ==== -->
-<!-- Shown after successful login -->
-<div id="app-container" style="display: none;">
-        
-<!-- Top Header (Logo + Messages Icon) -->
-<!-- Start of Main Header Navigation -->
-<nav id="main-header" class="navbar fixed-top top-header justify-content-between align-items-center">
-<a href="#" class="app-logo">Shahpathi</a>
-<div class="header-icon" onclick="openTab('messages', null)">
-<i class="bi bi-chat-square-dots-fill text-primary"></i> 
-<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem; top: 15px !important; right: 10px;">5</span>
-</div>
-</nav>
+        <div id="signup-view" class="auth-view" style="display: none;">
+            <h2 class="mb-4 fw-bold">Sign Up</h2>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="signup-name" placeholder="Full Name">
+                <label>Full Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="signup-email" placeholder="name@example.com">
+                <label>Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="signup-pass" placeholder="Password">
+                <label>Password</label>
+            </div>
+            <button class="btn btn-primary w-100 py-3 mb-3 fw-bold" onclick="handleSignup()">Sign Up</button>
+            <p class="text-center text-secondary">Already have an account? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('login')">Log In</span></p>
+        </div>
+    </div>
 
 
+    <div id="app-container" style="display: none;">
 
-<!-- === HOME / FEED SECTION ==== -->
-<div id="home" class="content-section" style="display: block; padding: 15px; padding-bottom: 80px;">
-            
-<!-- Create Post Input Area -->
-<div class="custom-card p-3 d-flex align-items-center" onclick="openCreatePostModal()">
-<img id="my-avatar-small" src="assets/photos/hello.jpg" class="user-avatar-small me-3">
+        <nav id="main-header" class="navbar fixed-top top-header justify-content-between align-items-center">
+            <a href="#" class="app-logo">Shahpathi</a>
+            <div class="header-icon" onclick="openTab('messages', null)">
+                <i class="bi bi-chat-square-dots-fill text-primary"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem; top: 15px !important; right: 10px;">5</span>
+            </div>
+        </nav>
 
-<div style="background: var(--bg-color); flex: 1; padding: 10px 15px; border-radius: 20px; color: var(--secondary-text);"> Kuch naya post karein. </div>
-</div>
+        <div id="home" class="content-section" style="display: block; padding: 15px; padding-bottom: 80px;">
 
-<!-- All Posts will be loaded here -->
-<div id="feed-container">
-<div class="text-center mt-5 text-muted">
-<div class="spinner-border text-primary" role="status"></div>
-<p class="mt-2">Loading Posts...</p>
-</div></div></div>
+            <div class="custom-card p-3 d-flex align-items-center" onclick="openCreatePostModal()">
+                <img id="my-avatar-small" src="assets/photos/hello.jpg" class="user-avatar-small me-3">
+                <div style="background: var(--bg-color); flex: 1; padding: 10px 15px; border-radius: 20px; color: var(--secondary-text);"> Kuch naya post karein. </div>
+            </div>
 
-
-
-<!-- === SEARCH SECTION === -->
-<div id="search" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
-<input type="text" class="form-control py-3 mb-3" placeholder="Search topics, exams..." style="border-radius: 12px;">
-<h6 class="text-muted fw-bold mb-3">TRENDING</h6>
-<div class="d-flex flex-wrap gap-2">
-<span class="search-tag">SSC CGL</span>
-<span class="search-tag">UPSC 2026</span>
-<span class="search-tag">Science Quiz</span>
-<span class="search-tag">Maths Formulas</span>
-</div></div>
+            <div id="feed-container">
+                <div class="text-center mt-5 text-muted">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2">Loading Posts...</p>
+                </div>
+            </div>
+        </div>
 
 
-
-<!-- === STUDY SECTION === -->
-<div id="study" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
-
-
-<!-- Main Study Grid -->
-<div id="study-main-grid">
-<h6 class="studytabtitle">RESOURCES</h6>
-<div class="row g-2 mb-4">
-<div class="col-3">
-<div class="study-grid-card" onclick="openStudySubView('notes-view')">
-<i class="bi bi-file-earmark-pdf-fill study-icon-sm text-danger"></i>
-<div class="study-title-sm">Notes</div></div></div>
-<div class="col-3">
-<div class="study-grid-card" onclick="openStudySubView('books-view')"><i class="bi bi-journal-bookmark-fill study-icon-sm text-primary"></i><div class="study-title-sm">Books</div></div></div>
-<div class="col-3"><div class="study-grid-card" onclick="openStudySubView('videos-view')"><i class="bi bi-play-btn-fill study-icon-sm text-success"></i><div class="study-title-sm">Videos</div></div></div>
-<div class="col-3"><div class="study-grid-card"><i class="bi bi-clock-history study-icon-sm text-warning"></i><div class="study-title-sm">PYQ</div></div></div>
-</div></div>
+        <div id="search" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
+            <input type="text" class="form-control py-3 mb-3" placeholder="Search topics, exams..." style="border-radius: 12px;">
+            <h6 class="text-muted fw-bold mb-3">TRENDING</h6>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="search-tag">SSC CGL</span>
+                <span class="search-tag">UPSC 2026</span>
+                <span class="search-tag">Science Quiz</span>
+                <span class="search-tag">Maths Formulas</span>
+            </div>
+        </div>
 
 
+        <div id="study" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
 
-<!-- Notes Sub-view -->
-<div id="notes-view" class="study-sub-view">
-<div class="sub-header-styled" onclick="closeStudySubView()"><i class="bi bi-arrow-left me-3"></i> Back to Study</div>
-<div id="notes-list-container" class="mt-3"></div>
-</div></div>
+            <div id="study-main-grid">
+                <h6 class="studytabtitle">RESOURCES</h6>
+                <div class="row g-2 mb-4">
+                    <div class="col-3">
+                        <div class="study-grid-card" onclick="openStudySubView('notes-view', 'Notes')">
+                            <i class="bi bi-file-earmark-pdf-fill study-icon-sm text-danger"></i>
+                            <div class="study-title-sm">Notes</div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="study-grid-card" onclick="openStudySubView('books-view', 'Books')"><i class="bi bi-journal-bookmark-fill study-icon-sm text-primary"></i>
+                            <div class="study-title-sm">Books</div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="study-grid-card" onclick="openStudySubView('videos-view', 'Videos')"><i class="bi bi-play-btn-fill study-icon-sm text-success"></i>
+                            <div class="study-title-sm">Videos</div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="study-grid-card"><i class="bi bi-clock-history study-icon-sm text-warning"></i>
+                            <div class="study-title-sm">PYQ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-
-<!-- === ALERTS / NOTIFICATIONS SECTION === -->
-<div id="alerts" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
-<h6 class="text-center text-muted mt-5">No new notifications</h6>
-</div>
-
-
-
-<!-- === PROFILE SECTION ==== -->
-<div id="profile" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
-<div class="profile-card">
-<div class="img-wrap">
-<img id="profile-display-img" src="assets/photos/annadp.png" class="profile-pic-big">
-<div class="edit-icon"><i class="bi bi-pencil-fill"></i></div>
-</div>
-<h3 id="profile-display-name" class="user-name">Student</h3>
-<div id="profile-display-email" class="user-handle">...</div>
-                
-<div class="stats-row">
-<div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Posts</span></div>
-<div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Followers</span></div>
-<div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Following</span></div>
-</div></div>
-
-<div class="menu-card">
-
-<div class="menu-item" onclick="openSubPage('account-center'); loadEditData();">
-<div class="menu-icon"><i class="bi bi-person-circle"></i></div>
-<div class="menu-text">Edit Profile</div>
-<i class="bi bi-chevron-right chevron"></i>
-</div>
-
-<div class="menu-item" onclick="openSubPage('app-settings')">
-<div class="menu-icon"><i class="bi bi-gear-fill"></i></div>
-<div class="menu-text">Settings</div>
-<i class="bi bi-chevron-right chevron"></i>
-</div></div>
-<button class="btn-logout" onclick="handleLogout()">Log Out</button>
-</div>
+            <div id="notes-view" class="study-sub-view" style="display: none;">
+                <div id="notes-list-container" class="mt-3"></div>
+            </div>
+        </div>
 
 
-
-<!-- === BOTTOM NAVIGATION BAR === -->
-<div class="bottom-nav fixed-bottom d-flex justify-content-between align-items-center">
-<div class="nav-item-custom active" onclick="openTab('home', this)">
-<i class="bi bi-house-door-fill"></i><span>Home</span>
-</div>
-<div class="nav-item-custom" onclick="openTab('search', this)">
-<i class="bi bi-search"></i><span>Search</span>
-</div>
-<div class="nav-item-custom" onclick="openTab('study', this)">
-<i class="bi bi-book-half"></i><span>Study</span>
-</div>
-<div class="nav-item-custom" onclick="openTab('alerts', this)">
-<i class="bi bi-bell-fill"></i><span>Alerts</span>
-</div>
-<div class="nav-item-custom" onclick="openTab('profile', this)">
-<i class="bi bi-person-fill"></i><span>Profile</span>
-</div></div></div>
+        <div id="alerts" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
+            <h6 class="text-center text-muted mt-5">No new notifications</h6>
+        </div>
 
 
+        <div id="profile" class="content-section" style="display: none; padding: 15px; padding-bottom: 80px;">
+            <div class="profile-card">
+                <div class="img-wrap">
+                    <img id="profile-display-img" src="assets/photos/annadp.png" class="profile-pic-big">
+                    <div class="edit-icon"><i class="bi bi-pencil-fill"></i></div>
+                </div>
+                <h3 id="profile-display-name" class="user-name">Student</h3>
+                <div id="profile-display-email" class="user-handle">...</div>
 
-<!-- === CREATE POST MODAL=== -->
-<div id="create-post-modal">
-<div class="d-flex align-items-center justify-content-between p-3 border-bottom bg-white">
-<i class="bi bi-x-lg fs-4" onclick="closeCreatePostModal()"></i>
-<h5 class="m-0 fw-bold">Create Post</h5>
-<button class="btn btn-primary rounded-pill px-4" onclick="publishPost()">Post</button>
-</div>
-        
-<div id="text-editor-wrapper" class="style-clean">
-<textarea id="main-textarea" placeholder="What's on your mind?" oninput="autoResize(this)"></textarea>
-</div>
+                <div class="stats-row">
+                    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Posts</span></div>
+                    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Followers</span></div>
+                    <div class="stat-item"><span class="stat-num">0</span><span class="stat-label">Following</span></div>
+                </div>
+            </div>
 
-<div id="dynamic-input-area" class="p-3 d-none"></div>
+            <div class="menu-card">
+                <div class="menu-item" onclick="openSubPage('account-center', 'Edit Profile'); loadEditData();">
+                    <div class="menu-icon"><i class="bi bi-person-circle"></i></div>
+                    <div class="menu-text">Edit Profile</div>
+                    <i class="bi bi-chevron-right chevron"></i>
+                </div>
 
-<div class="fixed-bottom bg-white p-3 border-top">
-<div class="quick-palette mb-3">
-<div class="color-circle active-circle" style="background:var(--card-bg); border:2px solid #ccc" onclick="applyColor('none', this)"></div>
-<div class="color-circle" style="background: linear-gradient(135deg, #FF9A8B, #FF6A88);" onclick="applyColor('grad-sunset', this)"></div>
-<div class="color-circle" style="background: linear-gradient(135deg, #2AFADF, #4C83FF);" onclick="applyColor('grad-ocean', this)"></div>
-<div class="picker-btn" onclick="toggleExtendedPicker()"><i class="bi bi-eyedropper"></i></div>
-</div>
-
-<div id="extended-picker">
-<div class="color-grid" id="grid-solid"></div>
-</div>
-
-<div class="chip-container">
-<div class="chip-btn active" onclick="switchPostMode('text', this)"><i class="bi bi-pencil-square"></i> Text</div>
-<div class="chip-btn" onclick="switchPostMode('quiz', this)"><i class="bi bi-list-check"></i> Quiz</div>
-<div class="chip-btn" onclick="switchPostMode('poll', this)"><i class="bi bi-bar-chart-fill"></i> Poll</div>
-<div class="chip-btn" onclick="switchPostMode('media', this)"><i class="bi bi-image"></i> Media</div>
-</div></div></div>
+                <div class="menu-item" onclick="openSubPage('app-settings', 'Settings')">
+                    <div class="menu-icon"><i class="bi bi-gear-fill"></i></div>
+                    <div class="menu-text">Settings</div>
+                    <i class="bi bi-chevron-right chevron"></i>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+        </div>
 
 
-<!-- === APP SETTINGS PAGE === -->
-<div id="app-settings" class="content-section" style="padding-top:0;display:none">
-<div class="sub-header-styled"><i class="bi bi-arrow-left fs-4 me-3 text-primary" onclick="closeSubPage()"></i><h5 class="mb-0 fw-bold">Settings</h5></div>
-<div class="p-2 pb-5">
-<div class="section-label">Preferences</div>
-<div class="card-group">
-<div class="item active" onclick="this.classList.toggle('active')">
-<div class="item-left"><i class="bi bi-bell item-icon"></i><span class="item-title">Push Notifications</span></div>
-<div class="toggle"></div>
-</div>
-        
-<div class="item dm-toggle" onclick="toggleDarkMode()">
-<div class="item-left"><i class="bi bi-moon item-icon"></i><span class="item-title">Dark Mode</span></div>
-<div class="toggle"></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-translate item-icon"></i><span class="item-title">Language</span></div>
-<div class="item-right">English <i class="bi bi-chevron-right chevron"></i></div>
-</div>
-</div>
-<div class="section-label">Security</div>
-<div class="card-group">
-<div class="item">
-<div class="item-left"><i class="bi bi-lock item-icon"></i><span class="item-title">Password</span></div>
-<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
-</div>
-        
-<div class="item active" onclick="this.classList.toggle('active')">
-<div class="item-left"><i class="bi bi-fingerprint item-icon"></i><span class="item-title">Biometric Login</span></div>
-<div class="toggle"></div>
-</div>
-</div>
-<div class="section-label">Study Content</div>
-<div class="card-group">
-<div class="item active" onclick="this.classList.toggle('active')">
-<div class="item-left"><i class="bi bi-play-circle item-icon"></i><span class="item-title">Auto-play Videos</span></div>
-<div class="toggle"></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-camera-video item-icon"></i><span class="item-title">Video Quality</span></div>
-<div class="item-right">360p <i class="bi bi-chevron-right chevron"></i></div>
-</div>
-</div>
-<div class="section-label">Data & Storage</div>
-<div class="card-group">
-<div class="item" onclick="this.classList.toggle('active')">
-<div class="item-left"><i class="bi bi-hdd-network item-icon"></i><span class="item-title">Data Saver</span></div>
-<div class="toggle"></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-trash item-icon"></i><span class="item-title">Clear Cache</span></div>
-<div class="item-right">24 MB</div>
-</div>
-</div>
-<div class="section-label">About</div>
-<div class="card-group">
-<div class="item">
-<div class="item-left"><i class="bi bi-file-earmark-text item-icon"></i><span class="item-title">Terms of Service</span></div>
-<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-shield-check item-icon"></i><span class="item-title">Privacy Policy</span></div>
-<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-bug item-icon"></i><span class="item-title">Report a Problem</span></div>
-<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-share item-icon"></i><span class="item-title">Share App</span></div>
-<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
-</div>
-<div class="item">
-<div class="item-left"><i class="bi bi-info-circle item-icon"></i><span class="item-title">App Version</span></div>
-<div class="item-right">v2.0.1</div>
-</div>
-</div>
-</div>
-</div>
+        <div class="bottom-nav fixed-bottom d-flex justify-content-between align-items-center">
+            <div class="nav-item-custom active" onclick="openTab('home', this)">
+                <i class="bi bi-house-door-fill"></i><span>Home</span>
+            </div>
+            <div class="nav-item-custom" onclick="openTab('search', this)">
+                <i class="bi bi-search"></i><span>Search</span>
+            </div>
+            <div class="nav-item-custom" onclick="openTab('study', this)">
+                <i class="bi bi-book-half"></i><span>Study</span>
+            </div>
+            <div class="nav-item-custom" onclick="openTab('alerts', this)">
+                <i class="bi bi-bell-fill"></i><span>Alerts</span>
+            </div>
+            <div class="nav-item-custom" onclick="openTab('profile', this)">
+                <i class="bi bi-person-fill"></i><span>Profile</span>
+            </div>
+        </div>
+    </div>
 
 
+    <div id="create-post-modal">
+        <div class="d-flex align-items-center justify-content-between p-3 border-bottom bg-white">
+            <i class="bi bi-x-lg fs-4" onclick="closeCreatePostModal()"></i>
+            <h5 class="m-0 fw-bold">Create Post</h5>
+            <button class="btn btn-primary rounded-pill px-4" onclick="publishPost()">Post</button>
+        </div>
 
-<!-- Start of Account Center Content Section -->
-<div id="account-center" class="content-section" style="padding-top:0;display:none">
-            
-<div class="sub-header-styled">
-<i class="bi bi-arrow-left fs-4 me-3 text-primary" onclick="closeSubPage()"></i>
-<h5 class="mb-0 fw-bold">Edit Profile</h5>
-</div>
-<div class="p-3 pb-5">
-<div class="edit-dp-wrapper">
-<img src="https://randomuser.me/api/portraits/men/32.jpg" class="edit-dp-img">
-<div class="edit-cam-badge">
-<i class="bi bi-camera-fill"></i>
-</div>
-</div>
-<div class="row g-2 mt-2">
+        <div id="text-editor-wrapper" class="style-clean">
+            <textarea id="main-textarea" placeholder="What's on your mind?" oninput="autoResize(this)"></textarea>
+        </div>
 
-<div class="col-12">
-<div class="form-floating">
-<input type="text" class="form-control" id="fname" value="Amit Sharma" placeholder="Name">
-<label for="fname">Full Name</label>
-</div></div>
+        <div id="dynamic-input-area" class="p-3 d-none"></div>
 
-<div class="col-12">
-<div class="form-floating">
-<input type="text" class="form-control" id="uname" value="amit_dev" placeholder="User">
-<label for="uname">Username</label>
-</div></div>
-        
-<div class="col-12">
-<div class="form-floating">
-<input type="email" class="form-control" id="email" value="amit@example.com" placeholder="Email">
-<label for="email">Email Address</label>
-</div>
-</div>
-        
-<div class="col-12">
-<div class="form-floating">
-<input type="tel" class="form-control" id="mobile" value="+91 9876543210" placeholder="Mobile">
-<label for="mobile">Mobile</label>
-</div></div>
+        <div class="fixed-bottom bg-white p-3 border-top">
+            <div class="quick-palette mb-3">
+                <div class="color-circle active-circle" style="background:var(--card-bg); border:2px solid #ccc" onclick="applyColor('none', this)"></div>
+                <div class="color-circle" style="background: linear-gradient(135deg, #FF9A8B, #FF6A88);" onclick="applyColor('grad-sunset', this)"></div>
+                <div class="color-circle" style="background: linear-gradient(135deg, #2AFADF, #4C83FF);" onclick="applyColor('grad-ocean', this)"></div>
+                <div class="picker-btn" onclick="toggleExtendedPicker()"><i class="bi bi-eyedropper"></i></div>
+            </div>
 
-<div class="col-12">
-<div class="form-floating">
-<input type="date" class="form-control" id="dob" value="1999-01-18" placeholder="DOB">
-<label for="dob">Date of Birth</label>
-</div></div>
-        
-<div class="col-12">
-<div class="form-floating">
-<input type="text" class="form-control" id="state" value="Maharashtra" placeholder="State">
-<label for="state">State</label>
-</div></div>
+            <div id="extended-picker">
+                <div class="color-grid" id="grid-solid"></div>
+            </div>
 
-<div class="col-12">
-<div class="form-floating">
- <input type="text" class="form-control" id="city" value="Mumbai" placeholder="City">
-<label for="city">City</label>
-</div></div>
-        
-<div class="col-12">
-<div class="form-floating">
- <input type="text" class="form-control" id="uni" value="Delhi Uni" placeholder="Uni">
-<label for="uni">University</label>
-</div></div>
-
-<div class="col-12">
-<div class="form-floating">
-<input type="text" class="form-control" id="clg" value="Hansraj" placeholder="College">
-<label for="clg">College</label>
-</div></div>
-        
-<div class="col-2">
-<button class="btn-update-profile">UpDate</button>
-</div>
-</div></div></div>
-</div> 
+            <div class="chip-container">
+                <div class="chip-btn active" onclick="switchPostMode('text', this)"><i class="bi bi-pencil-square"></i> Text</div>
+                <div class="chip-btn" onclick="switchPostMode('quiz', this)"><i class="bi bi-list-check"></i> Quiz</div>
+                <div class="chip-btn" onclick="switchPostMode('poll', this)"><i class="bi bi-bar-chart-fill"></i> Poll</div>
+                <div class="chip-btn" onclick="switchPostMode('media', this)"><i class="bi bi-image"></i> Media</div>
+            </div>
+        </div>
+    </div>
 
 
+    <div id="app-settings" class="content-section" style="padding-top:0; display:none">
+        <div class="p-2 pb-5">
+            <div class="section-label">Preferences</div>
+            <div class="card-group">
+                <div class="item active" onclick="this.classList.toggle('active')">
+                    <div class="item-left"><i class="bi bi-bell item-icon"></i><span class="item-title">Push Notifications</span></div>
+                    <div class="toggle"></div>
+                </div>
+
+                <div class="item dm-toggle" onclick="toggleDarkMode()">
+                    <div class="item-left"><i class="bi bi-moon item-icon"></i><span class="item-title">Dark Mode</span></div>
+                    <div class="toggle"></div>
+                </div>
+                <div class="item">
+                    <div class="item-left"><i class="bi bi-translate item-icon"></i><span class="item-title">Language</span></div>
+                    <div class="item-right">English <i class="bi bi-chevron-right chevron"></i></div>
+                </div>
+            </div>
+            <div class="section-label">Security</div>
+            <div class="card-group">
+                <div class="item">
+                    <div class="item-left"><i class="bi bi-lock item-icon"></i><span class="item-title">Password</span></div>
+                    <div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+                </div>
+
+                <div class="item active" onclick="this.classList.toggle('active')">
+                    <div class="item-left"><i class="bi bi-fingerprint item-icon"></i><span class="item-title">Biometric Login</span></div>
+                    <div class="toggle"></div>
+                </div>
+            </div>
+            <div class="section-label">About</div>
+            <div class="card-group">
+                <div class="item">
+                    <div class="item-left"><i class="bi bi-info-circle item-icon"></i><span class="item-title">App Version</span></div>
+                    <div class="item-right">v2.0.1</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <div id="account-center" class="content-section" style="padding-top:0; display:none">
+        <div class="p-3 pb-5">
+            <div class="edit-dp-wrapper">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="edit-dp-img">
+                <div class="edit-cam-badge">
+                    <i class="bi bi-camera-fill"></i>
+                </div>
+            </div>
+            <div class="row g-2 mt-2">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="fname" value="Amit Sharma" placeholder="Name">
+                        <label for="fname">Full Name</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="uname" value="amit_dev" placeholder="User">
+                        <label for="uname">Username</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" value="amit@example.com" placeholder="Email">
+                        <label for="email">Email Address</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <button class="btn-update-profile">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Start of Kebab Menu Offcanvas Section -->
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="kebabMenu" >
- <div class="offcanvas-header justify-content-center pb-1 pt-3">
-<div class="menu-handle"></div>
-</div>
-<div class="offcanvas-body px-0 pt-1 pb-4">
-<div class="menu-list-item"><i class="bi bi-link-45deg"></i> Copy Link</div>
-<div class="menu-list-item"><i class="bi bi-share"></i> Share via...</div>
-<div class="menu-list-item"><i class="bi bi-eye-slash"></i> Not interested</div>
-<div class="menu-divider"></div>
-<div class="menu-list-item"><i class="bi bi-person-plus"></i> Follow @user</div>
-<div class="menu-list-item"><i class="bi bi-volume-mute"></i> Mute @user</div>
-<div class="menu-divider"></div>
-<div class="menu-list-item danger-item"><i class="bi bi-flag"></i> Report</div>
-<div class="menu-list-item danger-item"><i class="bi bi-slash-circle"></i> Block</div>
-<div class="menu-divider-thick"></div>
-<div class="menu-list-item menu-cancel-btn" data-bs-dismiss="offcanvas">Cancel</div>
-</div>
-</div>
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="kebabMenu">
+        <div class="offcanvas-header justify-content-center pb-1 pt-3">
+            <div class="menu-handle"></div>
+        </div>
+        <div class="offcanvas-body px-0 pt-1 pb-4">
+            <div class="menu-list-item"><i class="bi bi-link-45deg"></i> Copy Link</div>
+            <div class="menu-divider"></div>
+            <div class="menu-list-item menu-cancel-btn" data-bs-dismiss="offcanvas">Cancel</div>
+        </div>
+    </div>
 
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-<!-- === EXTERNAL SCRIPTS === -->
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Custom JS Files -->
-<script src="js/firebase-cfg.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/main.js"></script>
-<script src="js/feed.js"></script>
-<script src="js/create.js"></script>
-<script src="js/profile.js"></script>
-<script src="js/study.js"></script>
+    <script src="js/firebase-cfg.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/create.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/study.js"></script>
 
 </body>
+
 </html>
