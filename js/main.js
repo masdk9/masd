@@ -127,20 +127,3 @@ function closeStudySubView() {
     document.getElementById('study-main-grid').style.display = 'block';
 }
 
-
-/* =========================================
-   FIX: HIDE TABS BY DEFAULT
-   ========================================= */
-
-/* Saare sections ko shuru me chupao */
-.content-section {
-    display: none;
-}
-
-/* Sirf Home ko dikhao (kiunki HTML me inline style hai) */
-#home {
-    display: block;
-}
-
-
-
