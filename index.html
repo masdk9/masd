@@ -63,16 +63,24 @@ New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="swi
 <p class="text-center text-secondary">Already have an account? <span class="text-primary fw-bold" style="cursor:pointer" onclick="switchAuthMode('login')">Log In</span></p>
 </div></div>
 
+
+
+
 <!-- === MAIN APP CONTAINER ==== -->
 <!-- Shown after successful login -->
 <div id="app-container" style="display: none;">
         
 <!-- Top Header (Logo + Messages Icon) -->
-<div class="top-header d-flex align-items-center justify-content-between">
-<div class="app-logo">Shahpathi</div>
-<div class="d-flex gap-3">
-<i class="bi bi-chat-dots-fill header-icon" onclick="openTab('messages')"></i>
-</div></div>
+<!-- Start of Main Header Navigation -->
+<nav id="main-header" class="navbar fixed-top top-header justify-content-between align-items-center">
+<a href="#" class="app-logo">Shahpathi</a>
+<div class="header-icon" onclick="openTab('messages', null)">
+<i class="bi bi-chat-square-dots-fill text-primary"></i> 
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem; top: 15px !important; right: 10px;">5</span>
+</div>
+</nav>
+
+
 
 <!-- === HOME / FEED SECTION ==== -->
 <div id="home" class="content-section" style="display: block; padding: 15px; padding-bottom: 80px;">
