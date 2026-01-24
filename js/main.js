@@ -9,64 +9,90 @@ function openTab(tabId, navElement) {
         sec.style.display = 'none';
     });
 
-    // B. Requested Tab Dikhao
+    // B. Universal Header ko bhi chupao (Just in case wo khula reh gaya ho)
+    const uniHeader = document.getElementById('dynamic-header');
+    if(uniHeader) uniHeader.style.display = 'none';
+
+    // C. Requested Tab Dikhao
     const targetSection = document.getElementById(tabId);
     if (targetSection) {
         targetSection.style.display = 'block';
     }
 
-    // === HEADER LOGIC (Fix: Show only on Home) ===
-    const header = document.querySelector('.top-header');
+    // === MAIN HEADER LOGIC (Shahpathi Logo) ===
+    const mainHeader = document.getElementById('main-header');
+    const bottomNav = document.querySelector('.bottom-nav');
     
+    // Bottom nav wapas dikhao (agar sub-page se wapas aaye hain)
+    if(bottomNav) bottomNav.style.display = 'flex';
+
     if (tabId === 'home') {
-        // Agar Home hai to Header dikhao
-        if(header) header.style.display = 'flex';
-        // Header ke liye upar jagah banao
+        // Agar Home hai to Main Header dikhao
+        if(mainHeader) mainHeader.style.display = 'flex';
         document.body.style.paddingTop = '70px'; 
     } else {
-        // Baaki tabs par Header chupao
-        if(header) header.style.display = 'none';
-        // Upar ka gap kam karo (taki content upar se shuru ho)
+        // Baaki tabs par Main Header chupao (Clean look)
+        if(mainHeader) mainHeader.style.display = 'none';
         document.body.style.paddingTop = '20px'; 
     }
 
-    // C. Bottom Nav Icons Update Karo
+    // D. Bottom Nav Icons Update Karo
     if (navElement) {
-        // Sabse active class hatao
         document.querySelectorAll('.nav-item-custom').forEach(item => {
             item.classList.remove('active');
         });
-        // Click kiye gaye icon par active lagao
         navElement.classList.add('active');
     }
 }
 
-// 2. SUB-PAGE NAVIGATION (Settings, Edit Profile)
-function openSubPage(pageId) {
-    // Main sections chupao
-    document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
-    
-    // Header bhi chupao (Subpages par apna back button hota hai)
-    const header = document.querySelector('.top-header');
-    if(header) header.style.display = 'none';
-    document.body.style.paddingTop = '0px';
+// ===============================================
+// 2. UNIVERSAL SUB-PAGE LOGIC (The Main Fix)
+// ===============================================
 
-    // Subpage dikhao
+function openSubPage(pageId, pageTitle) {
+    // 1. Main UI (Home, Tabs, Bottom Nav) Sab Chupao
+    document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
+    document.querySelector('.bottom-nav').style.display = 'none';
+    
+    // Main Logo Header bhi chupao
+    const mainHeader = document.getElementById('main-header');
+    if(mainHeader) mainHeader.style.display = 'none';
+
+    // 2. Target Page Dikhao (Settings, Profile Edit, etc.)
     const page = document.getElementById(pageId);
     if(page) {
         page.style.display = 'block';
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0); // Upar scroll karo
+    }
+
+    // 3. UNIVERSAL HEADER SET KARO
+    const dynamicHeader = document.getElementById('dynamic-header');
+    const dynamicTitle = document.getElementById('dynamic-header-title');
+
+    if (dynamicHeader && dynamicTitle) {
+        dynamicTitle.innerText = pageTitle || 'Details'; // Title badlo
+        dynamicHeader.style.display = 'flex'; // Header dikhao
     }
 }
 
 function closeSubPage() {
-    // Sub-pages band karo
-    document.getElementById('app-settings').style.display = 'none';
-    document.getElementById('account-center').style.display = 'none';
-    
-    // Wapas Profile Tab par jao
-    openTab('profile', document.querySelector("div[onclick*='profile']"));
+    // 1. Universal Header Chupao
+    const dynamicHeader = document.getElementById('dynamic-header');
+    if(dynamicHeader) dynamicHeader.style.display = 'none';
+
+    // 2. Sare Sub-pages band karo
+    const subPages = ['account-center', 'app-settings', 'notes-view', 'books-view', 'search'];
+    subPages.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+    });
+
+    // 3. Wapas Home ya Profile par jao (Reset Logic)
+    // Sabse safe hai ki 'Home' tab khol do, isse header/nav apne aap reset ho jayega
+    const homeTabBtn = document.querySelector(".nav-item-custom[onclick*='home']");
+    openTab('home', homeTabBtn);
 }
+
 
 // 3. DARK MODE TOGGLE
 function toggleDarkMode() {
@@ -81,7 +107,6 @@ function toggleDarkMode() {
         localStorage.setItem('theme', 'dark');
     }
     
-    // Toggle switch UI update (agar settings me ho)
     const toggleBtn = document.querySelector('.toggle'); 
     if(toggleBtn) {
         if(!isDark) toggleBtn.parentElement.classList.add('active');
@@ -89,30 +114,27 @@ function toggleDarkMode() {
     }
 }
 
-// 4. STUDY TAB SUB-VIEWS (Notes, Books logic)
-function openStudySubView(viewId) {
-    document.getElementById('study-main-grid').style.display = 'none';
-    const view = document.getElementById(viewId);
-    if(view) view.style.display = 'block';
+
+// 4. STUDY TAB SUB-VIEWS (Notes, Books)
+// Ab ye bhi Universal Header use karega!
+function openStudySubView(viewId, title) {
+    openSubPage(viewId, title);
 }
 
-function closeStudySubView() {
-    document.querySelectorAll('.study-sub-view').forEach(el => el.style.display = 'none');
-    document.getElementById('study-main-grid').style.display = 'block';
-}
+// (closeStudySubView ki ab jarurat nahi hai, kyunki universal 'closeSubPage' ye kaam karega)
+
 
 // 5. AUTH (Login/Logout Simulation)
 function handleLogin() {
-    // Login screen chupao, App dikhao
     document.getElementById('auth-container').style.display = 'none';
     document.getElementById('app-container').style.display = 'block';
     
-    // By default Home tab kholo
-    openTab('home', document.querySelector('.nav-item-custom.active'));
+    // Login ke baad Home kholo
+    const homeBtn = document.querySelector(".nav-item-custom[onclick*='home']");
+    openTab('home', homeBtn);
 }
 
 function handleLogout() {
-    // App chupao, Login screen dikhao
     document.getElementById('app-container').style.display = 'none';
     document.getElementById('auth-container').style.display = 'block';
 }
@@ -127,22 +149,19 @@ function switchAuthMode(mode) {
     }
 }
 
-// 6. INITIALIZATION (Jab App start ho)
+
+// 6. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
-    // Theme load karo
+    // Theme load
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.setAttribute('data-theme', savedTheme);
     
-    // Agar pehle se Dark mode tha to button on rakho
     if (savedTheme === 'dark') {
         const toggleBtn = document.querySelector('.toggle');
         if(toggleBtn) toggleBtn.parentElement.classList.add('active');
     }
 
-    // Default Tab Fix (Home par header dikhao)
-    const header = document.querySelector('.top-header');
-    if(header) {
-        header.style.display = 'flex';
-        document.body.style.paddingTop = '70px';
-    }
+    // Default State: Agar login nahi hai to auth dikhao, nahi to app
+    // (Abhi ke liye maan lete hain user logged out hai)
+    // document.getElementById('auth-container').style.display = 'block';
 });
