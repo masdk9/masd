@@ -216,49 +216,20 @@
 /* =========================================
    EDIT PROFILE PAGE
    ========================================= */
-.edit-dp-wrapper {
-    width: 120px;
-    height: 120px;
-    margin: 10px auto 30px;
-    position: relative;
-}
+.edit-dp-wrapper { width: 110px; height: 110px; margin: 10px auto 25px; position: relative; }
+.edit-dp-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--card-bg); }
+.edit-cam-badge { position: absolute; bottom: 0; right: 0; background: var(--primary-color); color: white; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; border: 3px solid var(--card-bg); }
 
-.edit-dp-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--card-bg);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+/* Form Floating Input Fixes for Dark Mode */
+#account-center .form-floating > .form-control { background-color: transparent !important; border: 1px solid var(--border-color); color: var(--text-color); border-radius: 12px; height: 58px; box-shadow: none; }
+#account-center .form-floating > label { background-color: transparent !important; color: var(--secondary-text); padding-left: 15px; }
+#account-center .form-floating > label::after { background-color: transparent !important; }
+#account-center .form-floating > .form-control:focus ~ label, #account-center .form-floating > .form-control:not(:placeholder-shown) ~ label { color: var(--primary-color) !important; font-weight: 600; opacity: 1; transform: scale(0.85) translateY(-0.7rem) translateX(0.15rem); }
+.btn-update-profile { background: var(--primary-color); color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: 700; }
 
-.edit-cam-badge {
-    position: absolute;
-    bottom: 0;
-    right: 5px;
-    background: var(--primary-color);
-    color: white;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    border: 3px solid var(--card-bg);
-    cursor: pointer;
-    font-size: 1.2rem;
-}
 
-.btn-update-profile {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    width: 100%;
-    font-weight: 700;
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-}
+
+
 
 /* Dark Mode Fixes for Inputs */
 /* Ye code ensure karta hai ki dark mode me input transparent dikhe */
