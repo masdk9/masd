@@ -213,15 +213,88 @@ New here? <span class="text-primary fw-bold" style="cursor:pointer" onclick="swi
 <div class="chip-btn" onclick="switchPostMode('media', this)"><i class="bi bi-image"></i> Media</div>
 </div></div></div>
 
+
 <!-- === APP SETTINGS PAGE === -->
-<div id="app-settings" class="content-section" style="display: none; padding-bottom: 20px; background: var(--bg-color); min-height: 100vh;">
-<div class="sub-header-styled ps-2" onclick="closeSubPage()"><i class="bi bi-arrow-left p-2 fs-4"></i> <span class="fs-5 fw-bold">Settings</span></div>
-<div class="section-label">Appearance</div>
-<div class="card-group mx-3">
-<div class="item" onclick="toggleDarkMode()">
-<div class="item-left"><i class="bi bi-moon-stars-fill item-icon"></i><div class="item-title">Dark Mode</div></div>
+<div id="app-settings" class="content-section" style="padding-top:0;display:none">
+<div class="sub-header-styled"><i class="bi bi-arrow-left fs-4 me-3 text-primary" onclick="closeSubPage()"></i><h5 class="mb-0 fw-bold">Settings</h5></div>
+<div class="p-2 pb-5">
+<div class="section-label">Preferences</div>
+<div class="card-group">
+<div class="item active" onclick="this.classList.toggle('active')">
+<div class="item-left"><i class="bi bi-bell item-icon"></i><span class="item-title">Push Notifications</span></div>
 <div class="toggle"></div>
-</div></div></div>
+</div>
+        
+<div class="item dm-toggle" onclick="toggleDarkMode()">
+<div class="item-left"><i class="bi bi-moon item-icon"></i><span class="item-title">Dark Mode</span></div>
+<div class="toggle"></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-translate item-icon"></i><span class="item-title">Language</span></div>
+<div class="item-right">English <i class="bi bi-chevron-right chevron"></i></div>
+</div>
+</div>
+<div class="section-label">Security</div>
+<div class="card-group">
+<div class="item">
+<div class="item-left"><i class="bi bi-lock item-icon"></i><span class="item-title">Password</span></div>
+<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+</div>
+        
+<div class="item active" onclick="this.classList.toggle('active')">
+<div class="item-left"><i class="bi bi-fingerprint item-icon"></i><span class="item-title">Biometric Login</span></div>
+<div class="toggle"></div>
+</div>
+</div>
+<div class="section-label">Study Content</div>
+<div class="card-group">
+<div class="item active" onclick="this.classList.toggle('active')">
+<div class="item-left"><i class="bi bi-play-circle item-icon"></i><span class="item-title">Auto-play Videos</span></div>
+<div class="toggle"></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-camera-video item-icon"></i><span class="item-title">Video Quality</span></div>
+<div class="item-right">360p <i class="bi bi-chevron-right chevron"></i></div>
+</div>
+</div>
+<div class="section-label">Data & Storage</div>
+<div class="card-group">
+<div class="item" onclick="this.classList.toggle('active')">
+<div class="item-left"><i class="bi bi-hdd-network item-icon"></i><span class="item-title">Data Saver</span></div>
+<div class="toggle"></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-trash item-icon"></i><span class="item-title">Clear Cache</span></div>
+<div class="item-right">24 MB</div>
+</div>
+</div>
+<div class="section-label">About</div>
+<div class="card-group">
+<div class="item">
+<div class="item-left"><i class="bi bi-file-earmark-text item-icon"></i><span class="item-title">Terms of Service</span></div>
+<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-shield-check item-icon"></i><span class="item-title">Privacy Policy</span></div>
+<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-bug item-icon"></i><span class="item-title">Report a Problem</span></div>
+<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-share item-icon"></i><span class="item-title">Share App</span></div>
+<div class="item-right"><i class="bi bi-chevron-right chevron"></i></div>
+</div>
+<div class="item">
+<div class="item-left"><i class="bi bi-info-circle item-icon"></i><span class="item-title">App Version</span></div>
+<div class="item-right">v2.0.1</div>
+</div>
+</div>
+</div>
+</div>
+
+
 
 <!-- === EDIT PROFILE PAGE === -->
 <div id="account-center" class="content-section" style="display: none; padding-bottom: 20px; background: var(--bg-color); min-height: 100vh;">
