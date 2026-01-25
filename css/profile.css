@@ -1,67 +1,68 @@
 /* =========================================
-   APP FRAME FIX (Isse Index file disturb nahi hogi)
+   1. APP FRAME CONTAINER (Layout Fix)
    ========================================= */
 
+/* Ye main wrapper hai. Ye ensure karega ki page scroll na ho, 
+   bas ye div scroll ho, aur Bottom Nav dikhta rahe */
 .app-frame {
-    /* Screen ke upar fix karne ke liye */
-    position: fixed; 
+    /* Screen par fix rahega */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; 
-    background: var(--bg-color); /* Tumhara background color */
     
-    /* Sab kuch center me lane ke liye */
+    /* IMPORTANT: 100vh me se 70px minus kiya taaki Bottom Nav dikhe.
+       Agar Nav abhi bhi kat raha hai to 70px ko 80px kar dena */
+    height: calc(100vh - 70px); 
+    
+    background: var(--bg-color);
+    
+    /* Content ko center karne ke liye */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     
-    /* Scroll control inside frame */
-    overflow-y: auto;
-    z-index: 9999; /* Taaki ye sabse upar dikhe */
+    /* Agar screen choti hai to andar scroll hoga, pura page nahi hilega */
+    overflow-y: auto; 
+    z-index: 1; /* Nav ke niche rahega, content upar */
+    
     padding: 10px;
     box-sizing: border-box;
 }
 
-/* Scrollbar chhupane ke liye (App feel) */
+/* Scrollbar ko gayab karne ke liye (App feel) */
 .app-frame::-webkit-scrollbar {
     display: none;
 }
+.app-frame {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
 /* =========================================
-   ELEMENTS SIZE FIX (Sirf App Frame ke andar)
+   2. ELEMENT STYLING (Sirf App Frame ke andar apply hoga)
    ========================================= */
 
-/* 1. Profile Card ko chhota kiya taaki fit ho */
+/* Profile Card - Compact Size */
 .app-frame .profile-card {
     width: 100%;
     max-width: 400px;
-    margin-bottom: 10px; /* Margin kam kiya */
-    padding: 15px;      /* Padding kam ki */
     background: var(--card-bg);
     border-radius: 16px;
+    padding: 15px; /* Padding kam ki */
     text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border: 1px solid var(--border-color);
+    margin-bottom: 15px; /* Gap kam kiya */
 }
 
-/* 2. Menu Card ko adjust kiya */
-.app-frame .menu-card {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 15px; /* Margin kam kiya */
-    background: var(--card-bg);
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-}
-
-/* 3. Photo choti ki */
+/* Photo Wrapper */
 .app-frame .img-wrap {
-    width: 85px;  /* Size 100 se 85 kiya */
+    position: relative;
+    width: 85px; /* Photo size 100 se 85 ki */
     height: 85px;
     margin: 0 auto 10px;
-    position: relative;
 }
 
 .app-frame .profile-pic-big {
@@ -72,7 +73,23 @@
     border: 3px solid var(--bg-color);
 }
 
-/* 4. Text thoda chota kiya */
+/* Edit Icon */
+.app-frame .edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--card-bg);
+    font-size: 12px;
+}
+
+/* Text Styling */
 .app-frame .user-name {
     font-size: 18px;
     font-weight: 700;
@@ -86,80 +103,86 @@
     margin-bottom: 10px;
 }
 
-/* 5. Menu Items height fix */
+/* Stats Row */
+.app-frame .stats-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 10px 0 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.app-frame .stat-num {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.app-frame .stat-label {
+    font-size: 0.7rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Menu Card - Compact Size */
+.app-frame .menu-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+}
+
 .app-frame .menu-item {
-    padding: 12px 15px; /* Padding kam ki */
     display: flex;
     align-items: center;
+    padding: 12px 15px; /* Padding kam ki */
     border-bottom: 1px solid var(--border-color);
-    color: var(--text-color);
     cursor: pointer;
+    color: var(--text-color);
+    transition: background 0.2s;
 }
 .app-frame .menu-item:last-child { border-bottom: none; }
+.app-frame .menu-item:active { background: var(--bg-color); }
 
 .app-frame .menu-icon {
     width: 30px;
     height: 30px;
-    margin-right: 12px;
-    font-size: 14px;
     background: rgba(0, 123, 255, 0.1);
     color: var(--primary-color);
     border-radius: 50%;
     display: grid;
     place-items: center;
+    margin-right: 12px;
+    font-size: 14px;
 }
 
 .app-frame .menu-text {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     flex-grow: 1;
 }
 
-/* 6. Logout Button */
+.app-frame .chevron {
+    color: var(--secondary-text);
+    font-size: 0.8rem;
+}
+
+/* Logout Button */
 .app-frame .btn-logout {
+    width: auto;
+    min-width: 140px;
     padding: 10px 30px;
-    font-size: 14px;
-    border-radius: 25px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 30px;
     border: none;
     color: white;
     background: var(--danger-color);
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
-}
-
-/* Extra Icons styling inside frame */
-.app-frame .edit-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    border: 2px solid var(--card-bg);
-}
-
-.app-frame .stats-row {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-color);
-}
-
-.app-frame .stat-num {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--primary-color);
-    display: block;
-}
-
-.app-frame .stat-label {
-    font-size: 11px;
-    color: var(--secondary-text);
-    text-transform: uppercase;
-    font-weight: 600;
+    font-size: 14px;
 }
