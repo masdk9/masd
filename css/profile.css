@@ -1,169 +1,125 @@
 /* =========================================
-   SAFE FIX: ONLY FOR PROFILE SECTION
+   APP FRAME FIX (Isse Index file disturb nahi hogi)
    ========================================= */
 
-/* 1. Wrapper Class (Ye html/body ko replace karega) */
-.profile-page-wrapper {
-    /* Ye div screen ki puri height lega */
-    height: 100vh; 
+.app-frame {
+    /* Screen ke upar fix karne ke liye */
+    position: fixed; 
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%; 
+    background: var(--bg-color); /* Tumhara background color */
     
-    /* Scroll band karne ke liye */
-    overflow: hidden; 
-    
-    /* Content ko center karne ke liye */
+    /* Sab kuch center me lane ke liye */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     
-    /* Background color ensure karein */
-    background: var(--bg-color); 
+    /* Scroll control inside frame */
+    overflow-y: auto;
+    z-index: 9999; /* Taaki ye sabse upar dikhe */
+    padding: 10px;
     box-sizing: border-box;
-    padding: 20px;
 }
 
-/* 2. Scrollbar Chhupana (Sirf is wrapper ke liye) */
-.profile-page-wrapper::-webkit-scrollbar {
+/* Scrollbar chhupane ke liye (App feel) */
+.app-frame::-webkit-scrollbar {
     display: none;
 }
 
 /* =========================================
-   COMPACT PROFILE STYLES (Margins Adjusted)
+   ELEMENTS SIZE FIX (Sirf App Frame ke andar)
    ========================================= */
 
-/* Profile Card */
-.profile-page-wrapper .profile-card {
+/* 1. Profile Card ko chhota kiya taaki fit ho */
+.app-frame .profile-card {
     width: 100%;
-    max-width: 400px; /* Mobile width fix */
+    max-width: 400px;
+    margin-bottom: 10px; /* Margin kam kiya */
+    padding: 15px;      /* Padding kam ki */
     background: var(--card-bg);
     border-radius: 16px;
-    padding: 20px 15px; /* Padding kam ki */
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border: 1px solid var(--border-color);
-    margin-bottom: 15px; /* Gap kam kiya */
 }
 
-/* Profile Picture Wrapper */
-.profile-page-wrapper .img-wrap {
-    position: relative;
-    width: 90px; /* Size adjust */
-    height: 90px;
+/* 2. Menu Card ko adjust kiya */
+.app-frame .menu-card {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px; /* Margin kam kiya */
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+/* 3. Photo choti ki */
+.app-frame .img-wrap {
+    width: 85px;  /* Size 100 se 85 kiya */
+    height: 85px;
     margin: 0 auto 10px;
+    position: relative;
 }
 
-.profile-page-wrapper .profile-pic-big {
+.app-frame .profile-pic-big {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--bg-color);
+    border: 3px solid var(--bg-color);
 }
 
-/* Edit Icon */
-.profile-page-wrapper .edit-icon {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: var(--primary-color);
-    color: white;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    border: 3px solid var(--card-bg);
-    font-size: 12px;
-}
-
-/* Text Styles */
-.profile-page-wrapper .user-name {
+/* 4. Text thoda chota kiya */
+.app-frame .user-name {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 2px;
     color: var(--text-color);
 }
 
-.profile-page-wrapper .user-handle {
+.app-frame .user-handle {
     font-size: 13px;
     color: var(--secondary-text);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-/* Stats */
-.profile-page-wrapper .stats-row {
-    display: flex;
-    justify-content: space-around;
-    padding: 0 10px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 15px;
-}
-
-.profile-page-wrapper .stat-num {
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.profile-page-wrapper .stat-label {
-    font-size: 0.75rem;
-    color: var(--secondary-text);
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-/* Menu Card */
-.profile-page-wrapper .menu-card {
-    width: 100%;
-    max-width: 400px;
-    background: var(--card-bg);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border: 1px solid var(--border-color);
-    margin-bottom: 20px;
-}
-
-.profile-page-wrapper .menu-item {
+/* 5. Menu Items height fix */
+.app-frame .menu-item {
+    padding: 12px 15px; /* Padding kam ki */
     display: flex;
     align-items: center;
-    padding: 14px 20px; /* Compact padding */
     border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
     color: var(--text-color);
-    transition: background 0.2s;
+    cursor: pointer;
 }
+.app-frame .menu-item:last-child { border-bottom: none; }
 
-.profile-page-wrapper .menu-item:last-child { border-bottom: none; }
-
-.profile-page-wrapper .menu-icon {
-    width: 32px;
-    height: 32px;
+.app-frame .menu-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    font-size: 14px;
     background: rgba(0, 123, 255, 0.1);
     color: var(--primary-color);
     border-radius: 50%;
     display: grid;
     place-items: center;
-    margin-right: 15px;
-    font-size: 14px;
 }
 
-.profile-page-wrapper .menu-text {
-    font-size: 15px;
+.app-frame .menu-text {
+    font-size: 14px;
     font-weight: 500;
     flex-grow: 1;
 }
 
-/* Logout Button */
-.profile-page-wrapper .btn-logout {
-    width: auto;
-    min-width: 150px;
-    padding: 10px 40px;
-    margin: 0 auto;
-    display: block;
-    border-radius: 30px;
+/* 6. Logout Button */
+.app-frame .btn-logout {
+    padding: 10px 30px;
+    font-size: 14px;
+    border-radius: 25px;
     border: none;
     color: white;
     background: var(--danger-color);
@@ -171,4 +127,39 @@
     box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }
 
-/* Baki Settings aur Edit Profile ka CSS same rahega kyunki wo alag page pe khulte hain */
+/* Extra Icons styling inside frame */
+.app-frame .edit-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--card-bg);
+}
+
+.app-frame .stats-row {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.app-frame .stat-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+}
+
+.app-frame .stat-label {
+    font-size: 11px;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    font-weight: 600;
+}
