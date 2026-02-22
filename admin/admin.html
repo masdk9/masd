@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DigiNotes Admin Panel</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://masd.neocities.org/admin/admin.css">
+</head>
+<body>
+
+<!-- ═══════ LOGIN SCREEN ════════ -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="login-logo">⚙️</div>
+<div class="login-title">DigiNotes Admin</div>
+<div class="login-sub">Sirf authorized admin ke liye</div>
+        <div class="login-form">
+            <div class="lf-group">
+<i class="bi bi-person-fill"></i>
+<input type="email" id="loginUser" placeholder="Admin Email">
+            </div>
+            <div class="lf-group">
+<i class="bi bi-lock-fill"></i>
+<input type="password" id="loginPass" placeholder="Password" onkeyup="if(event.key==='Enter')doLogin()">
+            </div>
+<div class="login-err" id="loginErr"></div>
+<button class="login-btn" onclick="doLogin()"><i class="bi bi-shield-lock-fill"></i> Login</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ ADMIN APP ══════════ -->
+<div class="admin-app" id="adminApp" style="display:none">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-brand">
+            <div class="sb-logo">⚙️</div>
+            <div>
+                <div class="sb-name">DigiNotes</div>
+                <div class="sb-role">Admin Panel</div>
+            </div>
+        </div>
+        <nav class="sb-nav">
+            <div class="sb-nav-label">MAIN</div>
+            <div class="sb-item on" onclick="showPage('dashboard',this)"><i class="bi bi-grid-fill"></i><span>Dashboard</span></div>
+            <div class="sb-item" onclick="showPage('newpost',this)"><i class="bi bi-plus-circle-fill"></i><span>New Post</span></div>
+            <div class="sb-item" onclick="showPage('posts',this)"><i class="bi bi-file-earmark-text-fill"></i><span>All Posts</span></div>
+            <div class="sb-nav-label">SETTINGS</div>
+            <div class="sb-item" onclick="showPage('monetize',this)"><i class="bi bi-cash-stack"></i><span>Monetization</span></div>
+            <div class="sb-item" onclick="showPage('comments',this)"><i class="bi bi-chat-dots-fill"></i><span>Comments</span></div>
+            <div class="sb-item" onclick="showPage('settings',this)"><i class="bi bi-gear-fill"></i><span>Settings</span></div>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-av">👤</div>
+                <div><div class="sb-uname">Admin</div><div class="sb-ustatus">● Online</div></div>
+            </div>
+            <button class="logout-btn" onclick="doLogout()"><i class="bi bi-box-arrow-right"></i></button>
+        </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-right">
+            <div class="live-badge"><span class="ldot"></span> Live Site</div>
+            <a href="index.html" target="_blank" class="site-link"><i class="bi bi-box-arrow-up-right"></i> View Site</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- ── DASHBOARD ── -->
+        <div class="page on" id="page-dashboard">
+            <div class="page-head">
+                <div class="page-title">📊 Dashboard</div>
+                <div class="page-sub">DigiNotes.net ka overview</div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card sc-cyan">
+                    <div class="sc-icon"><i class="bi bi-eye-fill"></i></div>
+                    <div class="sc-val" id="d-views">1,24,567</div>
+                    <div class="sc-lbl">Total Views</div>
+                    <div class="sc-change up">▲ +12% this week</div>
+                </div>
+                <div class="stat-card sc-yellow">
+                    <div class="sc-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+                    <div class="sc-val">342</div>
+                    <div class="sc-lbl">Total Posts</div>
+                    <div class="sc-change up">▲ +8 this week</div>
+                </div>
+                <div class="stat-card sc-lime">
+                    <div class="sc-icon"><i class="bi bi-heart-fill"></i></div>
+                    <div class="sc-val">18.4k</div>
+                    <div class="sc-lbl">Total Likes</div>
+                    <div class="sc-change up">▲ +234 today</div>
+                </div>
+                <div class="stat-card sc-orange">
+                    <div class="sc-icon"><i class="bi bi-people-fill"></i></div>
+                    <div class="sc-val">4,521</div>
+                    <div class="sc-lbl">Daily Visitors</div>
+                    <div class="sc-change up">▲ +5% vs yesterday</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-title">📈 Weekly Views</div>
+                    <div class="bar-chart" id="weeklyChart"></div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">🏷️ Posts by Type</div>
+                    <div class="donut-wrap" id="donutChart"></div>
+                </div>
+            </div>
+
+            <!-- Recent Posts -->
+            <div class="section-card">
+                <div class="section-head">
+                    <span>🕐 Recent Posts</span>
+                    <button class="sec-btn" onclick="showPage('posts',document.querySelector('.sb-item:nth-child(3)'))">View All</button>
+                </div>
+                <div id="recentPostsList"></div>
+            </div>
+        </div>
+
+        <!-- ── NEW POST ── -->
+        <div class="page" id="page-newpost">
+            <div class="page-head">
+                <div class="page-title">✍️ New Post</div>
+                <div class="page-sub">Naya post create karein</div>
+            </div>
+
+            <!-- Step 1: Type Select -->
+            <div class="section-card" id="step1">
+                <div class="section-head"><span>Step 1 — Post Type Select Karein</span></div>
+                <div class="type-grid">
+                    <div class="type-card" onclick="selectType('exam',this)">
+                        <div class="type-icon">📋</div>
+                        <div class="type-name">Exam / Job</div>
+                        <div class="type-desc">Notification, Recruitment</div>
+                    </div>
+                    <div class="type-card" onclick="selectType('result',this)">
+                        <div class="type-icon">🏆</div>
+                        <div class="type-name">Result</div>
+                        <div class="type-desc">Final Result, Merit List</div>
+                    </div>
+                    <div class="type-card" onclick="selectType('answerkey',this)">
+                        <div class="type-icon">🔑</div>
+                        <div class="type-name">Answer Key</div>
+                        <div class="type-desc">Provisional / Final Key</div>
+                    </div>
+                    <div class="type-card" onclick="selectType('admitcard',this)">
+                        <div class="type-icon">🪪</div>
+                        <div class="type-name">Admit Card</div>
+                        <div class="type-desc">Hall Ticket, Call Letter</div>
+                    </div>
+                    <div class="type-card" onclick="selectType('library',this)">
+                        <div class="type-icon">📚</div>
+                        <div class="type-name">Library / PDF</div>
+                        <div class="type-desc">Notes, Books, PYQ</div>
+                    </div>
+                    <div class="type-card" onclick="selectType('sponsored',this)">
+                        <div class="type-icon">📢</div>
+                        <div class="type-name">Sponsored</div>
+                        <div class="type-desc">Paid / Coaching Ad</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Form (dynamic) -->
+            <div id="step2" style="display:none">
+                <div class="section-card">
+                    <div class="section-head">
+                        <span id="formTitle">Step 2 — Card Info (Feed mein dikhega)</span>
+                    </div>
+                    <div id="cardForm"></div>
+                </div>
+                <div class="section-card" id="fullFormWrap">
+                    <div class="section-head"><span>Step 3 — Full Page Details</span></div>
+                    <div id="fullForm"></div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-cancel" onclick="resetForm()"><i class="bi bi-x-circle"></i> Cancel</button>
+                    <button class="btn-preview" onclick="previewPost()"><i class="bi bi-eye"></i> Preview</button>
+                    <button class="btn-publish" onclick="publishPost()"><i class="bi bi-send-fill"></i> Publish</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ALL POSTS ── -->
+        <div class="page" id="page-posts">
+            <div class="page-head">
+                <div class="page-title">📄 All Posts</div>
+                <div class="page-sub">Saare posts manage karein</div>
+            </div>
+            <!-- Filter Bar -->
+            <div class="posts-filter">
+                <button class="pf-btn on" onclick="filterPosts('ALL',this)">All</button>
+                <button class="pf-btn" onclick="filterPosts('exam',this)">📋 Exam</button>
+                <button class="pf-btn" onclick="filterPosts('result',this)">🏆 Result</button>
+                <button class="pf-btn" onclick="filterPosts('answerkey',this)">🔑 Answer Key</button>
+                <button class="pf-btn" onclick="filterPosts('admitcard',this)">🪪 Admit Card</button>
+                <button class="pf-btn" onclick="filterPosts('library',this)">📚 Library</button>
+            </div>
+            <div class="section-card" style="padding:0;overflow:hidden">
+                <div id="postsTable"></div>
+            </div>
+        </div>
+
+        <!-- ── MONETIZATION ── -->
+        <div class="page" id="page-monetize">
+            <div class="page-head">
+                <div class="page-title">💰 Monetization</div>
+                <div class="page-sub">Ads aur revenue manage karein</div>
+            </div>
+
+            <!-- Revenue Cards -->
+            <div class="stats-row">
+                <div class="stat-card sc-yellow">
+                    <div class="sc-icon"><i class="bi bi-google"></i></div>
+                    <div class="sc-val">₹0</div>
+                    <div class="sc-lbl">AdSense (Pending)</div>
+                    <div class="sc-change" style="color:rgba(255,255,255,.4)">Domain approval awaited</div>
+                </div>
+                <div class="stat-card sc-cyan">
+                    <div class="sc-icon"><i class="bi bi-megaphone-fill"></i></div>
+                    <div class="sc-val">₹0</div>
+                    <div class="sc-lbl">Sponsored Posts</div>
+                    <div class="sc-change" style="color:rgba(255,255,255,.4)">No active campaigns</div>
+                </div>
+                <div class="stat-card sc-orange">
+                    <div class="sc-icon"><i class="bi bi-amazon"></i></div>
+                    <div class="sc-val">₹0</div>
+                    <div class="sc-lbl">Affiliate</div>
+                    <div class="sc-change" style="color:rgba(255,255,255,.4)">Setup pending</div>
+                </div>
+                <div class="stat-card sc-lime">
+                    <div class="sc-icon"><i class="bi bi-qr-code"></i></div>
+                    <div class="sc-val">₹0</div>
+                    <div class="sc-lbl">Donations (UPI)</div>
+                    <div class="sc-change" style="color:rgba(255,255,255,.4)">QR active on site</div>
+                </div>
+            </div>
+
+            <!-- AdSense -->
+            <div class="section-card">
+                <div class="section-head">
+                    <span><i class="bi bi-google" style="color:var(--yellow)"></i> Google AdSense</span>
+                    <label class="toggle-sw"><input type="checkbox" id="tog-adsense" onchange="toggleAd('adsense',this)"><span class="tog-slider"></span></label>
+                </div>
+                <div class="mon-info">AdSense script yahan paste karein. Ye automatically saare <code>$adsense</code> slots mein inject hoga.</div>
+                <textarea class="mon-script" id="sc-adsense" placeholder="<!-- Google AdSense Script Yahan Paste Karein -->
+<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX' crossorigin='anonymous'></script>"></textarea>
+                <div class="mon-slots">
+                    <div class="slot-item"><i class="bi bi-check-circle-fill" style="color:var(--lime)"></i> Home Feed — Cards ke beech</div>
+                    <div class="slot-item"><i class="bi bi-check-circle-fill" style="color:var(--lime)"></i> Full Pages — Content ke beech</div>
+                    <div class="slot-item"><i class="bi bi-check-circle-fill" style="color:var(--lime)"></i> Tools Page — Top mein</div>
+                </div>
+                <button class="btn-save-script" onclick="saveScript('adsense')"><i class="bi bi-floppy-fill"></i> Save AdSense Script</button>
+            </div>
+
+            <!-- Sponsored -->
+            <div class="section-card">
+                <div class="section-head">
+                    <span><i class="bi bi-megaphone-fill" style="color:var(--cyan)"></i> Sponsored Post Create Karein</span>
+                    <button class="sec-btn" onclick="selectType('sponsored',null);showPage('newpost',null)">+ Add Sponsored</button>
+                </div>
+                <div class="mon-info">Coaching institutes ya kisi bhi advertiser ka sponsored post add karein. Same card design mein "Sponsored" badge lagega.</div>
+                <div class="sponsored-list" id="sponsoredList">
+                    <div class="empty-msg">Abhi koi sponsored post nahi hai</div>
+                </div>
+            </div>
+
+            <!-- Affiliate -->
+            <div class="section-card">
+                <div class="section-head">
+                    <span><i class="bi bi-amazon" style="color:var(--orange)"></i> Amazon Affiliate Links</span>
+                    <label class="toggle-sw"><input type="checkbox" id="tog-affiliate" onchange="toggleAd('affiliate',this)"><span class="tog-slider"></span></label>
+                </div>
+                <div class="mon-info">Amazon affiliate script ya product widget yahan paste karein. Library pages pe automatically dikhega.</div>
+                <textarea class="mon-script" id="sc-affiliate" placeholder="<!-- Amazon Affiliate Script Yahan Paste Karein -->"></textarea>
+                <button class="btn-save-script" onclick="saveScript('affiliate')"><i class="bi bi-floppy-fill"></i> Save Affiliate Script</button>
+            </div>
+
+            <!-- Donation UPI -->
+            <div class="section-card">
+                <div class="section-head">
+                    <span><i class="bi bi-qr-code" style="color:var(--lime)"></i> Donation / UPI Settings</span>
+                </div>
+                <div class="form-row">
+                    <div class="form-g"><label>UPI ID</label><input type="text" id="upiId" value="diginotes@upi" placeholder="yourname@upi"></div>
+                    <div class="form-g"><label>QR Code Image URL</label><input type="url" id="upiQr" placeholder="https://...qr.png"></div>
+                </div>
+                <div class="form-g" style="margin-top:8px"><label>Donation Message</label><textarea id="donMsg" style="height:70px" placeholder="Agar hamaari mehnat ne help ki toh...">Ye platform free hai aur hamesha rahega. Agar hamaari mehnat ne aapki padhai mein help ki hai toh ek chai zaroor pilaao! 🙏</textarea></div>
+                <button class="btn-save-script" onclick="toast('✅ UPI settings saved!')"><i class="bi bi-floppy-fill"></i> Save UPI Settings</button>
+            </div>
+        </div>
+
+        <!-- ── COMMENTS ── -->
+        <div class="page" id="page-comments">
+            <div class="page-head">
+                <div class="page-title">💬 Comments</div>
+                <div class="page-sub">User comments moderate karein</div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card sc-cyan"><div class="sc-icon"><i class="bi bi-chat-fill"></i></div><div class="sc-val">1,247</div><div class="sc-lbl">Total Comments</div></div>
+                <div class="stat-card sc-lime"><div class="sc-icon"><i class="bi bi-check-circle-fill"></i></div><div class="sc-val">1,198</div><div class="sc-lbl">Approved</div></div>
+                <div class="stat-card sc-orange"><div class="sc-icon"><i class="bi bi-exclamation-triangle-fill"></i></div><div class="sc-val">49</div><div class="sc-lbl">Flagged</div></div>
+                <div class="stat-card sc-yellow"><div class="sc-icon"><i class="bi bi-clock-fill"></i></div><div class="sc-val">12</div><div class="sc-lbl">Pending Review</div></div>
+            </div>
+            <div class="section-card">
+                <div class="section-head">
+                    <span>🚩 Flagged Comments</span>
+                    <button class="sec-btn danger" onclick="deleteAllFlagged()">Delete All Flagged</button>
+                </div>
+                <div id="flaggedComments"></div>
+            </div>
+            <div class="section-card">
+                <div class="section-head"><span>⚙️ Filter Settings</span></div>
+                <div class="mon-info">Ye words automatically block ho jaate hain. Comma se separate karein.</div>
+                <div class="form-g"><label>BLOCKED WORDS</label><textarea id="blockedWords" style="height:80px" placeholder="word1, word2, word3...">sale, buy, click here, www., http, 9999999999, 8888888888</textarea></div>
+                <div class="toggle-row">
+                    <div class="tog-item"><label class="toggle-sw"><input type="checkbox" checked><span class="tog-slider"></span></label><span>Phone numbers block karein</span></div>
+                    <div class="tog-item"><label class="toggle-sw"><input type="checkbox" checked><span class="tog-slider"></span></label><span>URLs/Links block karein</span></div>
+                    <div class="tog-item"><label class="toggle-sw"><input type="checkbox"><span class="tog-slider"></span></label><span>New users ke comments hold karein</span></div>
+                </div>
+                <button class="btn-save-script" onclick="toast('✅ Filter settings saved!')"><i class="bi bi-floppy-fill"></i> Save Filter Settings</button>
+            </div>
+        </div>
+
+        <!-- ── SETTINGS ── -->
+        <div class="page" id="page-settings">
+            <div class="page-head">
+                <div class="page-title">⚙️ Settings</div>
+                <div class="page-sub">Site aur admin settings</div>
+            </div>
+            <div class="section-card">
+                <div class="section-head"><span>🌐 Site Settings</span></div>
+                <div class="form-row">
+                    <div class="form-g"><label>SITE NAME</label><input type="text" value="DigiNotes.net"></div>
+                    <div class="form-g"><label>TAGLINE</label><input type="text" value="India ka Best Free Education Portal"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-g"><label>TELEGRAM LINK</label><input type="url" placeholder="https://t.me/..."></div>
+                    <div class="form-g"><label>WHATSAPP GROUP</label><input type="url" placeholder="https://chat.whatsapp.com/..."></div>
+                </div>
+                <div class="form-g" style="margin-top:8px"><label>INSTAGRAM LINK</label><input type="url" placeholder="https://instagram.com/..."></div>
+                <button class="btn-save-script" onclick="toast('✅ Site settings saved!')"><i class="bi bi-floppy-fill"></i> Save Settings</button>
+            </div>
+            <div class="section-card">
+                <div class="section-head"><span>🔐 Admin Password Change</span></div>
+                <div class="form-row">
+                    <div class="form-g"><label>CURRENT PASSWORD</label><input type="password" placeholder="Current password"></div>
+                    <div class="form-g"><label>NEW PASSWORD</label><input type="password" placeholder="New password"></div>
+                </div>
+                <div class="form-g" style="margin-top:8px"><label>CONFIRM PASSWORD</label><input type="password" placeholder="Confirm new password"></div>
+                <button class="btn-save-script" onclick="toast('✅ Password updated!')"><i class="bi bi-floppy-fill"></i> Update Password</button>
+            </div>
+            <div class="section-card">
+                <div class="section-head"><span>🗑️ Danger Zone</span></div>
+                <div class="danger-actions">
+                    <button class="btn-danger-out" onclick="toast('🗑️ All drafts cleared!')"><i class="bi bi-trash-fill"></i> Clear All Drafts</button>
+                    <button class="btn-danger-out" onclick="toast('🔄 Cache cleared!')"><i class="bi bi-arrow-clockwise"></i> Clear Cache</button>
+                    <button class="btn-danger-out" onclick="toast('📊 Stats reset!')"><i class="bi bi-graph-down"></i> Reset Stats</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal-overlay" id="previewModal" onclick="closePreview()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-head">
+            <span>👁️ Post Preview</span>
+            <button onclick="closePreview()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body" id="previewBody"></div>
+        <div class="modal-foot">
+            <button class="btn-cancel" onclick="closePreview()">Close</button>
+            <button class="btn-publish" onclick="publishPost()"><i class="bi bi-send-fill"></i> Publish Now</button>
+        </div>
+    </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal-box" style="text-align:center;max-width:320px">
+        <div style="font-size:3rem;margin-bottom:10px">🎉</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--lime);margin-bottom:6px">Post Published!</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px">Post successfully publish ho gaya hai.<br><span style="font-size:10px;color:var(--cyan)" id="successSlug"></span></div>
+        <button class="btn-publish" onclick="closeSuccess()" style="width:100%">✓ OK</button>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="a-toast" id="atoast"></div>
+
+<script type="module" src="https://masd.neocities.org/admin/admin.js"></script>
+</body>
+</html>
