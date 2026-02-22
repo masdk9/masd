@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- SEO tags dynamically set by JS -->
+    <title>Loading... — DigiNotes.net</title>
+    <meta name="description" content="DigiNotes.net — India ka best free education portal">
+    <meta property="og:title" content="DigiNotes.net">
+    <meta property="og:description" content="Exam notifications, results, admit cards, study material">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Post Page Specific ── */
+        body { padding-bottom: 0 !important; }
+
+        /* Hero Band */
+        .fhb-inner { background: linear-gradient(135deg,rgba(255,107,53,.25),rgba(255,60,172,.2),rgba(22,1,58,.95)); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 18px 16px 14px; }
+        .fhb-title  { font-size: 1.05rem; font-weight: 900; line-height: 1.35; color: #fff; margin-bottom: 6px; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+        .fhb-notice { font-size: 11px; color: rgba(220,210,255,.6); line-height: 1.6; margin-bottom: 12px; }
+        .fhb-chip   { font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 9px; display: inline-flex; align-items: center; gap: 4px; }
+        .chip-o { background: rgba(255,107,53,.12); border: 1px solid rgba(255,107,53,.25); color: var(--orange); }
+        .chip-g { background: rgba(57,255,20,.1);   border: 1px solid rgba(57,255,20,.22);  color: var(--lime); }
+        .chip-c { background: rgba(0,229,255,.1);   border: 1px solid rgba(0,229,255,.2);   color: var(--cyan); }
+
+        /* Vacancy Tables */
+        .vac-table { width: 100%; border-collapse: collapse; }
+        .vac-table th { font-size: 9px; font-weight: 800; color: var(--orange); padding: 6px 8px; text-align: left; border-bottom: 1px solid rgba(255,107,53,.2); letter-spacing: .8px; text-transform: uppercase; }
+        .vac-table td { padding: 7px 8px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.8); border-bottom: 1px solid rgba(255,255,255,.04); }
+        .vac-table td:last-child { font-weight: 800; color: var(--yellow); text-align: right; }
+        .vac-table tr:last-child td { border-bottom: none; }
+        .vac-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+        /* Age Grid */
+        .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+        .age-item { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 11px; padding: 9px 11px; }
+        .ai-cat   { font-size: 9px; font-weight: 600; color: rgba(255,255,255,.35); margin-bottom: 3px; }
+        .ai-range { font-size: 13px; font-weight: 900; color: var(--yellow); }
+
+        /* Timeline extra styles */
+        .td-tba  { background: rgba(255,229,0,.12); border: 1px solid rgba(255,229,0,.3); color: var(--yellow); }
+        .td-pend { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.25); }
+        .tg-tba  { background: rgba(255,229,0,.12); color: var(--yellow); }
+        .tg-pend { background: rgba(255,255,255,.05); color: rgba(255,255,255,.25); }
+        .tg-up   { background: rgba(0,229,255,.1); color: var(--cyan); }
+        .td-up   { background: rgba(0,229,255,.15); border: 1px solid rgba(0,229,255,.3); color: var(--cyan); }
+
+        /* Bar chart (reservation) */
+        .res-bar-track { flex: 1; height: 6px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
+        .res-bar-fill  { height: 100%; border-radius: 3px; }
+
+        /* Fee table */
+        .fee-tbl { width: 100%; border-collapse: collapse; }
+        .fee-tbl th { font-size: 9px; font-weight: 800; color: var(--pink); padding: 6px 8px; text-align: left; border-bottom: 1px solid rgba(255,60,172,.2); letter-spacing: .8px; text-transform: uppercase; }
+        .fee-tbl td { padding: 7px 8px; font-size: 11px; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); }
+        .fee-tbl td:last-child { font-weight: 900; color: var(--yellow); text-align: right; }
+        .fee-tbl td.refund { color: var(--lime); font-weight: 800; }
+        .fee-tbl tr:last-child td { border-bottom: none; }
+
+        /* Selection steps */
+        .sel-step { display: flex; gap: 10px; padding-bottom: 12px; position: relative; }
+        .sel-step:not(:last-child)::after { content: ''; position: absolute; left: 13px; top: 26px; bottom: 0; width: 2px; background: rgba(255,255,255,.06); }
+        .sel-num  { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,var(--cyan),var(--purple)); color: #fff; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+        .sel-name { font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+        .sel-note { font-size: 10px; color: rgba(255,255,255,.4); }
+
+        /* Docs */
+        .doc-item { display: flex; align-items: flex-start; gap: 8px; padding: 7px 10px; background: rgba(255,255,255,.03); border-radius: 10px; border: 1px solid rgba(255,255,255,.05); margin-bottom: 5px; }
+        .doc-item:last-child { margin-bottom: 0; }
+        .doc-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+        .doc-name { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.85); }
+        .doc-note { font-size: 10px; color: rgba(255,255,255,.4); margin-top: 1px; line-height: 1.4; }
+
+        /* Comments */
+        .cmt-section { padding: 0 13px; margin-bottom: 20px; }
+        .cmt-head    { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); display: flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 14px 0 0; border-top: 1px solid rgba(255,255,255,.07); }
+        .cmt-item    { display: flex; gap: 9px; margin-bottom: 14px; }
+        .cmt-av      { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; background: var(--card); border: 1px solid rgba(255,255,255,.1); }
+        .cmt-bd      { flex: 1; }
+        .cmt-nm      { font-size: 11px; font-weight: 800; color: var(--orange); }
+        .cmt-tx      { font-size: 12px; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+        .cmt-meta    { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+        .cmt-time    { font-size: 10px; color: rgba(255,255,255,.28); }
+        .cmt-lb      { font-size: 10px; font-weight: 700; background: none; border: none; cursor: pointer; font-family: 'Poppins',sans-serif; color: rgba(255,255,255,.28); padding: 0; transition: color .2s; }
+        .cmt-lb:hover { color: var(--pink); }
+        .replies     { margin-top: 8px; padding-left: 12px; border-left: 2px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 10px; }
+        .rep-item    { display: flex; gap: 8px; }
+        .rep-av      { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; background: var(--card); }
+        .rep-nm      { font-size: 10px; font-weight: 800; color: var(--cyan); }
+        .rep-tx      { font-size: 11px; color: rgba(255,255,255,.8); margin-top: 1px; line-height: 1.4; }
+        .rep-mt      { font-size: 9px; color: rgba(255,255,255,.25); margin-top: 3px; }
+        .rep-input-row { display: flex; gap: 7px; align-items: center; margin-top: 8px; padding-left: 12px; }
+        .rep-input-row input { flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(0,229,255,.2); border-radius: 12px; padding: 7px 11px; color: #fff; font-family: 'Poppins',sans-serif; font-size: 11px; outline: none; }
+        .rep-send    { width: 28px; height: 28px; border-radius: 8px; border: none; background: linear-gradient(135deg,var(--cyan),var(--purple)); color: #fff; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .cmt-input   { display: flex; gap: 8px; align-items: center; background: rgba(255,255,255,.05); border: 1px solid rgba(255,107,53,.22); border-radius: 16px; padding: 9px 12px; margin-top: 4px; }
+        .my-av       { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: var(--card); }
+        .cmt-input input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-family: 'Poppins',sans-serif; font-size: 12px; }
+        .cmt-input input::placeholder { color: rgba(255,255,255,.25); }
+        .cmt-send    { width: 28px; height: 28px; border-radius: 9px; border: none; background: linear-gradient(135deg,var(--orange),var(--pink)); color: #fff; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        /* Progress bar */
+        .prog-bar-track { background: rgba(255,255,255,.07); border-radius: 4px; height: 4px; overflow: hidden; margin-bottom: 6px; }
+        .prog-bar-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg,var(--lime),var(--cyan)); transition: width 1s; }
+
+        /* Skeleton */
+        .skel { background: linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+        /* Not Found */
+        .not-found { text-align: center; padding: 60px 20px; }
+        .not-found .nf-icon { font-size: 3rem; margin-bottom: 16px; }
+        .not-found h2 { font-size: 1.1rem; font-weight: 800; color: var(--pink); margin-bottom: 8px; }
+        .not-found p  { font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="app-header">
+    <div class="hdr-btn" onclick="history.back()"><i class="bi bi-arrow-left"></i></div>
+    <div class="brand">DigiNotes<span class="brand-dot">.net</span></div>
+    <div class="hdr-btn" id="shareBtn" onclick="doShare()"><i class="bi bi-share-fill"></i></div>
+</header>
+
+<!-- AD SLOT TOP -->
+<div class="ad-slot adsense-slot" style="padding:8px 14px 0"><!-- $adsense --></div>
+
+<!-- MAIN CONTENT -->
+<div id="postRoot">
+    <!-- Skeleton while loading -->
+    <div style="padding:12px 13px">
+        <div style="background:var(--card);border-radius:20px;padding:18px 16px">
+            <div class="skel" style="width:120px;height:16px;border-radius:8px;margin-bottom:10px"></div>
+            <div class="skel" style="width:95%;height:22px;border-radius:6px;margin-bottom:6px"></div>
+            <div class="skel" style="width:80%;height:22px;border-radius:6px;margin-bottom:12px"></div>
+            <div class="skel" style="width:100%;height:60px;border-radius:8px"></div>
+        </div>
+    </div>
+    <div style="padding:0 13px">
+        <div class="skel" style="height:120px;border-radius:17px;margin-bottom:9px"></div>
+        <div class="skel" style="height:200px;border-radius:17px;margin-bottom:9px"></div>
+        <div class="skel" style="height:180px;border-radius:17px"></div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-msg" id="toast"></div>
+
+<script type="module">
+import {
+    fetchPostBySlug, incrementView,
+    isPostLiked, toggleLike,
+    fetchComments, addComment, addReply,
+    formatNum, timeAgo, hasPhone, hasUrl
+} from './firebase-config.js';
+
+/* ─── USER IDENTITY ─── */
+const ANIMALS = ['🦆','🦊','🐼','🐯','🦁','🐸','🦉','🐺','🦋','🐬','🦅','🐨','🦝','🐮','🦜'];
+const NAMES   = ['Quick Learner','Sharp Mind','Night Owl','Star Student','Silent Reader','Fast Thinker','Deep Reader','Bold Achiever','Bright Spark','Wise Owl'];
+function getMe() {
+    let d = localStorage.getItem('dn_me');
+    if (!d) { d = JSON.stringify({ a: ANIMALS[Math.floor(Math.random()*ANIMALS.length)], n: NAMES[Math.floor(Math.random()*NAMES.length)] }); localStorage.setItem('dn_me',d); }
+    return JSON.parse(d);
+}
+const ME = getMe();
+
+/* ─── STAGE PIPELINE ─── */
+const PIPELINE = [
+    { key:'notif_date',       label:'Notification Release',       icon:'📢' },
+    { key:'apply_start',      label:'Online Apply Start',         icon:'📝' },
+    { key:'apply_end',        label:'Last Date Apply',            icon:'📅' },
+    { key:'fee_payment_end',  label:'Fee Payment Last Date',      icon:'💳' },
+    { key:'correction_start', label:'Correction Window Start',    icon:'✏️'  },
+    { key:'correction_end',   label:'Correction Window End',      icon:'✏️'  },
+    { key:'admit_card',       label:'Admit Card Release',         icon:'🪪'  },
+    { key:'exam_date',        label:'Exam Date',                  icon:'📋' },
+    { key:'answer_key',       label:'Answer Key Release',         icon:'🔑' },
+    { key:'objection_end',    label:'Objection Window End',       icon:'⚠️' },
+    { key:'result',           label:'Result Declaration',         icon:'🏆' },
+    { key:'scrutiny',         label:'Scrutiny / DV',              icon:'📂' },
+    { key:'medical',          label:'Medical Examination',        icon:'🏥' },
+    { key:'merit_list',       label:'Final Merit List',           icon:'📊' },
+    { key:'joining',          label:'Joining / Posting',          icon:'🎯' },
+];
+
+function parseDate(str) {
+    if (!str) return null;
+    const d = new Date(str);
+    if (!isNaN(d)) return d;
+    const months = {january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+    const m = str.toLowerCase().match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/);
+    if (m && months[m[2]] !== undefined) return new Date(parseInt(m[3]), months[m[2]], parseInt(m[1]));
+    return null;
+}
+
+function computeStages(post) {
+    const dates = post.dates || {};
+    const today = new Date(); today.setHours(0,0,0,0);
+    let lastFilledIdx = -1;
+    PIPELINE.forEach((s,i) => { if (dates[s.key] && dates[s.key] !== '') lastFilledIdx = i; });
+
+    return PIPELINE.map((s,i) => {
+        const val = dates[s.key];
+        if (i > lastFilledIdx && (!val || val === '')) return { ...s, status:'pending', display:null };
+        if (!val || val === '' || /tba|notify later|before exam|will be updated/i.test(val)) return { ...s, status:'tba', display: val || 'TBA' };
+        const parsed = parseDate(val);
+        if (parsed) {
+            if (parsed < today) return { ...s, status:'done',     display: val };
+            if (parsed.getTime() === today.getTime()) return { ...s, status:'active', display: val };
+            return { ...s, status:'upcoming', display: val };
+        }
+        return { ...s, status:'done', display: val };
+    });
+}
+
+/* ─── MAIN ─── */
+const slug = new URLSearchParams(location.search).get('id');
+
+if (!slug) {
+    showNotFound('Post ID missing');
+} else {
+    loadPost(slug);
+}
+
+async function loadPost(slug) {
+    const post = await fetchPostBySlug(slug);
+    if (!post) { showNotFound('Post nahi mili'); return; }
+
+    // SEO
+    document.title = `${post.title} — DigiNotes.net`;
+    document.querySelector('meta[name="description"]').content = post.desc || post.short_notice || '';
+    document.querySelector('meta[property="og:title"]').content = post.title;
+    document.querySelector('link[rel="canonical"]').href = location.href;
+
+    // View count
+    incrementView(slug);
+
+    // Render
+    document.getElementById('postRoot').innerHTML = buildFullPage(post);
+
+    // Load comments
+    loadComments(slug);
+
+    // Scroll to comments if #comments in URL
+    if (location.hash === '#comments') {
+        setTimeout(() => {
+            document.getElementById('comments-anchor')?.scrollIntoView({ behavior:'smooth' });
+        }, 500);
+    }
+
+    // Share button
+    window.doShare = () => {
+        if (navigator.share) {
+            navigator.share({ title: post.title, url: location.href });
+        } else {
+            navigator.clipboard.writeText(location.href);
+            toast('🔗 Link copied!');
+        }
+    };
+}
+
+/* ─── FULL PAGE BUILDER ─── */
+function buildFullPage(post) {
+    const stages = computeStages(post);
+    const done    = stages.filter(s => s.status === 'done').length;
+    const tba     = stages.filter(s => s.status === 'tba').length;
+    const pending = stages.filter(s => s.status === 'pending').length;
+
+    const activeStage   = stages.find(s => s.status === 'active');
+    const upcomingStage = stages.find(s => s.status === 'upcoming');
+    const phaseLabel    = activeStage ? `🔴 ${activeStage.label} — Live`
+                        : upcomingStage ? `⏰ Next: ${upcomingStage.label}`
+                        : '📢 Application Stage';
+
+    return `
+    <!-- HERO -->
+    <div style="margin:12px 13px 0">
+        <div class="fhb-inner">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+                <span style="font-size:9px;font-weight:800;color:rgba(255,255,255,.45);letter-spacing:1.2px;text-transform:uppercase">${post.org || ''}</span>
+                <span style="font-size:9px;font-weight:700;color:rgba(255,229,0,.7);background:rgba(255,229,0,.08);border:1px solid rgba(255,229,0,.2);padding:3px 9px;border-radius:8px">Advt: ${post.advt_no || 'N/A'}</span>
+            </div>
+            <div class="fhb-title">${post.title}</div>
+            <p class="fhb-notice">${post.short_notice || post.desc || ''}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+                <span class="fhb-chip chip-o"><i class="bi bi-calendar3"></i> ${post.pub_date || '—'}</span>
+                ${post.seats?.total ? `<span class="fhb-chip chip-g"><i class="bi bi-people-fill"></i> ${post.seats.total.toLocaleString('en-IN')} Posts</span>` : ''}
+                <span class="fhb-chip chip-c"><i class="bi bi-mortarboard-fill"></i> ${post.eligibility?.qual_short || post.ql || '—'}</span>
+            </div>
+            <!-- Progress -->
+            <div class="prog-bar-track">
+                <div class="prog-bar-fill" style="width:${Math.round(done/PIPELINE.length*100)}%"></div>
+            </div>
+            <div style="display:flex;gap:10px;font-size:9px;font-weight:700">
+                <span style="color:var(--lime)">✅ ${done} Done</span>
+                ${tba    ? `<span style="color:var(--yellow)">📌 ${tba} TBA</span>` : ''}
+                ${pending? `<span style="color:rgba(255,255,255,.3)">⏳ ${pending} Pending</span>` : ''}
+                <span style="margin-left:auto;color:var(--orange);font-size:9px">${phaseLabel}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="fp-cw">
+
+    <!-- AD SLOT -->
+    <div class="ad-slot adsense-slot" style="margin-bottom:9px"><!-- $adsense --></div>
+
+    ${buildVacancy(post.seats)}
+    ${buildEligibility(post.eligibility)}
+    ${buildAge(post.age)}
+    ${buildTimeline(stages)}
+    ${buildFee(post.fees)}
+    ${buildSelection(post.selection)}
+    ${buildDocs(post.documents)}
+    ${buildLinks(post.links, stages)}
+
+    <!-- AD SLOT BOTTOM -->
+    <div class="ad-slot adsense-slot" style="margin-bottom:9px"><!-- $adsense --></div>
+
+    </div>
+
+    ${buildActions(post, stages)}
+    `;
+}
+
+/* ─── VACANCY ─── */
+function buildVacancy(seats) {
+    if (!seats) return '';
+    let h = `<div class="sb sb-o">
+    <div class="sbt" style="color:var(--orange)"><i class="bi bi-person-lines-fill"></i> Vacancy Details</div>
+    <div style="text-align:center;background:linear-gradient(135deg,rgba(255,107,53,.15),rgba(255,60,172,.1));border:1px solid rgba(255,107,53,.25);border-radius:14px;padding:14px;margin-bottom:11px">
+        <div style="font-size:2rem;font-weight:900;color:var(--orange)">${seats.total?.toLocaleString('en-IN') || 'N/A'}</div>
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);margin-top:2px">Total Vacancies</div>
+    </div>`;
+
+    if (seats.post_wise?.length) {
+        h += `<div style="font-size:9px;font-weight:800;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">📋 Post-wise</div>
+        <div style="overflow-x:auto"><table class="vac-table">
+        <thead><tr><th>Post Name</th><th>Seats</th></tr></thead><tbody>
+        ${seats.post_wise.map((p,i)=>`<tr><td>${p.name}</td><td>${p.seats.toLocaleString('en-IN')}</td></tr>`).join('')}
+        </tbody></table></div>`;
+    }
+
+    if (seats.by_reservation?.length) {
+        h += `<div style="font-size:9px;font-weight:800;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin:11px 0 7px">🏷️ Reservation-wise</div>`;
+        const colors = {UR:'var(--orange)',General:'var(--orange)',OBC:'var(--cyan)',SC:'var(--pink)',ST:'var(--purple)',EWS:'var(--lime)'};
+        seats.by_reservation.forEach(r => {
+            const pct = Math.round((r.seats/seats.total)*100);
+            const clr = Object.entries(colors).find(([k])=>r.cat.toUpperCase().includes(k.toUpperCase()))?.[1] || 'var(--orange)';
+            h += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+                <span style="font-size:10px;font-weight:700;min-width:85px;color:rgba(255,255,255,.7)">${r.cat}</span>
+                <div class="res-bar-track"><div class="res-bar-fill" style="width:${pct}%;background:${clr}"></div></div>
+                <span style="font-size:11px;font-weight:800;color:${clr};min-width:45px;text-align:right">${r.seats.toLocaleString('en-IN')}</span>
+                <span style="font-size:9px;color:rgba(255,255,255,.3);min-width:26px">${pct}%</span>
+            </div>`;
+        });
+    }
+    return h + '</div>';
+}
+
+/* ─── ELIGIBILITY ─── */
+function buildEligibility(e) {
+    if (!e) return '';
+    return `<div class="sb sb-c">
+    <div class="sbt" style="color:var(--cyan)"><i class="bi bi-patch-check-fill"></i> Eligibility Criteria</div>
+    ${e.qualification?`<div style="background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);border-radius:12px;padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;font-weight:800;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">📚 Qualification</div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.85);line-height:1.55">${e.qualification}</div></div>`:''}
+    ${e.nationality?`<div style="background:rgba(57,255,20,.05);border:1px solid rgba(57,255,20,.12);border-radius:12px;padding:10px 12px;margin-bottom:8px"><div style="font-size:9px;font-weight:800;color:var(--lime);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">🌐 Nationality</div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.85)">${e.nationality}</div></div>`:''}
+    ${e.note?`<div style="font-size:10px;color:rgba(255,229,0,.7);background:rgba(255,229,0,.06);border:1px solid rgba(255,229,0,.15);border-radius:10px;padding:8px 10px">ℹ️ ${e.note}</div>`:''}
+    </div>`;
+}
+
+/* ─── AGE ─── */
+function buildAge(age) {
+    if (!age) return '';
+    const rows = [
+        age.general  && {cat:'General / UR', min:age.general.min, max:age.general.max},
+        age.ews      && {cat:'EWS',          min:age.ews.min,     max:age.ews.max},
+        age.obc      && {cat:'OBC (NCL)',     min:age.obc.min,     max:age.obc.max},
+        age.sc_st    && {cat:'SC / ST',       min:age.sc_st.min,   max:age.sc_st.max},
+    ].filter(Boolean);
+    const relaxations = [
+        age.female && `👩 Female: ${age.female}`,
+        age.ph     && `♿ PH: ${age.ph}`,
+        age.ex_sm  && `🎖️ Ex-SM: ${age.ex_sm}`,
+    ].filter(Boolean);
+
+    return `<div class="sb sb-y">
+    <div class="sbt" style="color:var(--yellow)"><i class="bi bi-person-badge-fill"></i> Age Limit <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,.35);margin-left:6px">📅 As on ${age.cutoff_date||'—'}</span></div>
+    <div class="age-grid" style="margin-bottom:${relaxations.length?'11px':'0'}">
+        ${rows.map(r=>`<div class="age-item"><div class="ai-cat">${r.cat}</div><div class="ai-range">${r.min}–${r.max} <span style="font-size:10px;font-weight:600">Yrs</span></div></div>`).join('')}
+    </div>
+    ${relaxations.length?`<div style="background:rgba(255,229,0,.06);border:1px solid rgba(255,229,0,.15);border-radius:11px;padding:9px 11px"><div style="font-size:9px;font-weight:800;color:var(--yellow);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">Age Relaxation</div>${relaxations.map(r=>`<div style="font-size:11px;color:rgba(255,255,255,.65);margin-bottom:4px">${r}</div>`).join('')}</div>`:''}
+    ${age.note?`<div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:8px">ℹ️ ${age.note}</div>`:''}
+    </div>`;
+}
+
+/* ─── SMART TIMELINE ─── */
+function buildTimeline(stages) {
+    const meta = {
+        done:     {dotCls:'td-done', dotTxt:'✓', tagCls:'tg-done', tagTxt:'Completed'},
+        active:   {dotCls:'td-now',  dotTxt:'●', tagCls:'tg-now',  tagTxt:'🔴 Active'},
+        upcoming: {dotCls:'td-up',   dotTxt:'◷', tagCls:'tg-up',   tagTxt:'Upcoming'},
+        tba:      {dotCls:'td-tba',  dotTxt:'?', tagCls:'tg-tba',  tagTxt:'📌 TBA'},
+        pending:  {dotCls:'td-pend', dotTxt:'–', tagCls:'tg-pend', tagTxt:'⏳ Pending'},
+    };
+    return `<div class="sb sb-y">
+    <div class="sbt" style="color:var(--yellow)"><i class="bi bi-clock-history"></i> All Important Dates</div>
+    <div class="tl">
+    ${stages.map((s,i) => {
+        const m = meta[s.status];
+        const isPend = s.status === 'pending';
+        const isTBA  = s.status === 'tba';
+        return `<div class="tlr" style="${isPend?'opacity:.42':''}">
+            <div class="tld ${m.dotCls}">${m.dotTxt}</div>
+            <div class="tl-info">
+                <div class="tl-name"><span style="${isPend?'color:rgba(255,255,255,.4)':''}">${s.icon} ${s.label}</span><span class="tl-tag ${m.tagCls}">${m.tagTxt}</span></div>
+                <div class="tl-date" style="${isPend?'color:rgba(255,255,255,.2)':isTBA?'color:rgba(255,229,0,.6)':''}">
+                    ${isPend ? '⏳ Update hoga jaise hi aaye' : isTBA ? `📌 ${s.display||'Notify Later'}` : s.display||'—'}
+                </div>
+            </div>
+        </div>`;
+    }).join('')}
+    </div></div>`;
+}
+
+/* ─── FEE ─── */
+function buildFee(fees) {
+    if (!fees) return '';
+    const hasRefund = fees.rows?.some(r => r.refund);
+    return `<div class="sb sb-p">
+    <div class="sbt" style="color:var(--pink)"><i class="bi bi-cash-coin"></i> Application Fee</div>
+    <div style="overflow-x:auto"><table class="fee-tbl">
+        <thead><tr><th>Category</th><th>Fee</th>${hasRefund?'<th style="color:var(--lime)">Refund*</th>':''}</tr></thead>
+        <tbody>${(fees.rows||[]).map(r=>`<tr><td>${r.cat}</td><td>${r.amt}</td>${hasRefund?`<td class="refund">${r.refund||'—'}</td>`:''}</tr>`).join('')}</tbody>
+    </table></div>
+    ${fees.refund_note?`<div style="font-size:10px;color:rgba(57,255,20,.7);background:rgba(57,255,20,.06);border:1px solid rgba(57,255,20,.15);border-radius:9px;padding:7px 10px;margin-top:9px">* ${fees.refund_note}</div>`:''}
+    ${fees.note?`<div style="font-size:10px;color:rgba(255,229,0,.7);margin-top:8px">⚠️ ${fees.note}</div>`:''}
+    ${fees.methods?.length?`<div style="font-size:9px;font-weight:800;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin:10px 0 6px">💳 Payment Methods</div><div style="display:flex;flex-wrap:wrap;gap:5px">${fees.methods.map(m=>`<span style="font-size:9px;font-weight:700;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6)">${m}</span>`).join('')}</div>`:''}
+    </div>`;
+}
+
+/* ─── SELECTION PROCESS ─── */
+function buildSelection(sel) {
+    if (!sel?.steps?.length) return '';
+    return `<div class="sb sb-c">
+    <div class="sbt" style="color:var(--cyan)"><i class="bi bi-diagram-3-fill"></i> Selection Process</div>
+    ${sel.steps.map((s,i)=>`
+    <div class="sel-step">
+        ${i<sel.steps.length-1?`<div style="position:absolute;left:13px;top:26px;bottom:0;width:2px;background:rgba(255,255,255,.06)"></div>`:''}
+        <div class="sel-num">${i+1}</div>
+        <div style="padding-top:3px"><div class="sel-name">${s.name}</div>${s.note?`<div class="sel-note">${s.note}</div>`:''}</div>
+    </div>`).join('')}
+    </div>`;
+}
+
+/* ─── DOCUMENTS ─── */
+function buildDocs(docs) {
+    if (!docs?.length) return '';
+    return `<div class="sb sb-pu">
+    <div class="sbt" style="color:var(--purple)"><i class="bi bi-folder-fill"></i> Documents Required</div>
+    ${docs.map(d=>`<div class="doc-item"><span class="doc-icon">${d.icon||'📄'}</span><div><div class="doc-name">${d.name}</div>${d.note?`<div class="doc-note">${d.note}</div>`:''}</div></div>`).join('')}
+    </div>`;
+}
+
+/* ─── LINKS ─── */
+function buildLinks(links, stages) {
+    if (!links) return '';
+    const sm = {};
+    stages.forEach(s => sm[s.key] = s.status);
+    const all = [];
+
+    if (links.apply)         all.push({icon:'📝', name:'Apply Online',            sub: sm.apply_end==='done'?'Last Date Over':'🟢 Apply Now',            url:links.apply,         color:'var(--lime)',   locked:sm.apply_end==='done'});
+    else if (!links.apply && sm.apply_start==='pending') all.push({icon:'📝', name:'Apply Online', sub:'⏳ Link aane wali hai', pending:true});
+    if (links.notification)  all.push({icon:'📄', name:'Official Notification',    sub:'Full PDF',                                                          url:links.notification,  color:'var(--yellow)'});
+    if (links.revised_vacancy) all.push({icon:'📊', name:'Revised Vacancy Notice', sub:'Updated',                                                          url:links.revised_vacancy,color:'var(--cyan)'});
+    if (links.admit_card)    all.push({icon:'🪪', name:'Admit Card Download',      sub:'🟢 Available',                                                      url:links.admit_card,    color:'var(--cyan)'});
+    else if (sm.admit_card!=='done') all.push({icon:'🪪', name:'Admit Card',       sub: sm.admit_card==='tba'?'📌 Exam se pehle aayega':'⏳ Pending',       pending:true});
+    if (links.answer_key)    all.push({icon:'🔑', name:'Answer Key PDF',           sub:'Provisional',                                                       url:links.answer_key,    color:'var(--orange)'});
+    else if (sm.answer_key!=='done') all.push({icon:'🔑', name:'Answer Key',       sub: sm.answer_key==='tba'?'📌 TBA':'⏳ Exam ke baad',                   pending:true});
+    if (links.objection)     all.push({icon:'⚠️', name:'Objection Portal',         sub:'Submit Objection',                                                  url:links.objection,     color:'var(--pink)'});
+    if (links.result)        all.push({icon:'🏆', name:'Result Download',          sub:'🟢 Declared',                                                       url:links.result,        color:'var(--lime)'});
+    else if (sm.result!=='done')     all.push({icon:'🏆', name:'Result',           sub: sm.result==='tba'?'📌 TBA':'⏳ Exam ke baad',                       pending:true});
+    if (links.merit_list)    all.push({icon:'📊', name:'Final Merit List',         sub:'PDF',                                                               url:links.merit_list,    color:'var(--purple)'});
+    if (links.official_site) all.push({icon:'🌐', name:'Official Website',         sub:'Official Portal',                                                   url:links.official_site, color:'rgba(255,255,255,.5)'});
+
+    return `<div class="sb sb-l">
+    <div class="sbt" style="color:var(--lime)"><i class="bi bi-link-45deg"></i> Important Links</div>
+    ${all.map(l=>`
+    <div class="dl-row${l.pending?' dl-pending':''}" style="${l.locked?'opacity:.55':''}" ${!l.pending&&l.url?`onclick="window.open('${l.url}','_blank')"`:''}>
+        <div class="dl-left">
+            <div class="dl-icon" style="background:rgba(255,255,255,.06)">${l.icon}</div>
+            <div><div class="dl-name">${l.name}</div><div class="dl-sub">${l.sub}</div></div>
+        </div>
+        <i class="bi ${l.pending?'bi-hourglass-split':'bi-box-arrow-up-right'}" style="color:${l.pending?'rgba(255,255,255,.15)':l.color||'rgba(255,255,255,.3)'}"></i>
+    </div>`).join('')}
+    </div>`;
+}
+
+/* ─── ACTION BUTTONS ─── */
+function buildActions(post, stages) {
+    const sm = {}; stages.forEach(s => sm[s.key] = s.status);
+    const links = post.links || {};
+    let btns = '';
+    if ((sm.apply_end==='upcoming'||sm.apply_end==='active') && links.apply)
+        btns += `<button class="btn-m ba" onclick="window.open('${links.apply}','_blank')"><i class="bi bi-box-arrow-up-right"></i> Apply Now — Official Site</button>`;
+    else if (sm.apply_end==='done' && !links.result)
+        btns += `<button class="btn-m ba" style="opacity:.55;cursor:default"><i class="bi bi-x-circle"></i> Apply Window Closed</button>`;
+    if (sm.objection_end==='active' && links.objection)
+        btns += `<button class="btn-m byw" onclick="window.open('${links.objection}','_blank')"><i class="bi bi-exclamation-triangle-fill"></i> Objection Submit Karein</button>`;
+    if (links.admit_card)
+        btns += `<button class="btn-m bk" onclick="window.open('${links.admit_card}','_blank')"><i class="bi bi-download"></i> Admit Card Download</button>`;
+    if (links.answer_key)
+        btns += `<button class="btn-m byw" onclick="window.open('${links.answer_key}','_blank')"><i class="bi bi-eye-fill"></i> Answer Key Dekhen</button>`;
+    if (links.result)
+        btns += `<button class="btn-m br" onclick="window.open('${links.result}','_blank')"><i class="bi bi-trophy-fill"></i> Result Dekhen</button>`;
+    if (links.notification)
+        btns += `<div class="btn-row"><button class="btn-m by" onclick="window.open('${links.notification}','_blank')"><i class="bi bi-file-earmark-pdf"></i> Notification PDF</button><button class="btn-m bn" onclick="toast('🔔 Feature coming soon!')"><i class="bi bi-bell-fill" style="color:var(--orange)"></i> Reminder Set Karein</button></div>`;
+    return `<div class="acts">${btns}</div>`;
+}
+
+/* ─── COMMENTS ─── */
+async function loadComments(slug) {
+    const section = document.getElementById('cmt-section');
+    if (!section) return;
+
+    const comments = await fetchComments(slug);
+    const cmtList  = document.getElementById('cmt-list');
+    if (!cmtList) return;
+
+    if (!comments.length) {
+        cmtList.innerHTML = `<div style="text-align:center;padding:20px;font-size:12px;color:rgba(255,255,255,.3)">Pehla comment karo! 💬</div>`;
+        return;
+    }
+
+    cmtList.innerHTML = comments.map(c => `
+    <div class="cmt-item">
+        <div class="cmt-av">${c.animal || '🦆'}</div>
+        <div class="cmt-bd">
+            <div class="cmt-nm">${c.name || 'Anonymous'}</div>
+            <div class="cmt-tx">${c.text}</div>
+            <div class="cmt-meta">
+                <span class="cmt-time">${timeAgo(c.created_at)}</span>
+                <button class="cmt-lb" onclick="likeCmt(this)">❤️ ${c.likes||0}</button>
+                <button class="cmt-lb" onclick="toggleReply('${c.id}')">↩️ Reply</button>
+            </div>
+            ${(c.replies||[]).length ? `
+            <div class="replies">
+                ${c.replies.map(r=>`
+                <div class="rep-item">
+                    <div class="rep-av">${r.animal||'🦆'}</div>
+                    <div><div class="rep-nm">${r.name||'Anonymous'}</div><div class="rep-tx">${r.text}</div><div class="rep-mt">${r.time||''}</div></div>
+                </div>`).join('')}
+            </div>` : ''}
+            <div class="rep-input-row" id="ri-${c.id}" style="display:none">
+                <input type="text" placeholder="Reply likhein..." id="rtx-${c.id}">
+                <button class="rep-send" onclick="postReply('${slug}','${c.id}')"><i class="bi bi-send-fill"></i></button>
+            </div>
+        </div>
+    </div>`).join('');
+}
+
+window.toggleReply = (cid) => {
+    const ri = document.getElementById('ri-' + cid);
+    ri.style.display = ri.style.display === 'none' ? 'flex' : 'none';
+    if (ri.style.display === 'flex') document.getElementById('rtx-' + cid)?.focus();
+};
+
+window.postReply = async (postSlug, commentId) => {
+    const inp = document.getElementById('rtx-' + commentId);
+    const txt = inp?.value?.trim();
+    if (!txt) return;
+    const result = await addReply(postSlug, commentId, txt, ME.a, ME.n);
+    if (result.error) { toast('⚠️ ' + result.error); return; }
+    inp.value = '';
+    document.getElementById('ri-' + commentId).style.display = 'none';
+    toast('✅ Reply post ho gayi!');
+    loadComments(postSlug);
+};
+
+window.postCmt = async (postSlug) => {
+    const inp = document.getElementById('mainCmtIn');
+    const txt = inp?.value?.trim();
+    if (!txt) return;
+    const result = await addComment(postSlug, txt, ME.a, ME.n);
+    if (result.error) { toast('⚠️ ' + result.error); return; }
+    inp.value = '';
+    toast('✅ Comment post ho gaya!');
+    loadComments(postSlug);
+};
+
+window.likeCmt = (btn) => {
+    const n = parseInt(btn.textContent.replace(/[^0-9]/g,'')) + 1;
+    btn.textContent = `❤️ ${n}`;
+    btn.style.color = 'var(--pink)';
+};
+
+function showNotFound(msg) {
+    document.getElementById('postRoot').innerHTML = `
+    <div class="not-found">
+        <div class="nf-icon">😕</div>
+        <h2>Post Nahi Mili</h2>
+        <p>${msg}</p>
+        <a href="index.html" class="btn-m ba" style="display:inline-flex;text-decoration:none;padding:12px 24px;border-radius:15px">🏠 Home Par Jaao</a>
+    </div>`;
+}
+
+function toast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+
+<!-- COMMENTS SECTION (outside module for simplicity) -->
+<div id="cmt-section" style="display:none">
+    <div class="cmt-section" id="comments-anchor">
+        <div class="cmt-head"><i class="bi bi-chat-dots-fill"></i> Discussion</div>
+        <div id="cmt-list"></div>
+        <div class="cmt-input">
+            <div class="my-av" id="myAv">🦆</div>
+            <input type="text" placeholder="Comment likhein..." id="mainCmtIn" onkeyup="if(event.key==='Enter')postCmt(new URLSearchParams(location.search).get('id'))">
+            <button class="cmt-send" onclick="postCmt(new URLSearchParams(location.search).get('id'))"><i class="bi bi-send-fill"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Show comments section after post loads
+const observer = new MutationObserver(() => {
+    if (document.querySelector('.fp-cw')) {
+        document.getElementById('cmt-section').style.display = 'block';
+        observer.disconnect();
+    }
+});
+observer.observe(document.getElementById('postRoot'), { childList: true, subtree: true });
+</script>
+
+</body>
+</html>
