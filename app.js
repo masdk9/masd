@@ -7,7 +7,7 @@ import {
     fetchPosts, fetchSettings,
     isPostLiked, toggleLike,
     formatNum
-} from 'https://masd.neocities.org/main/firebase-config.js';
+} from './firebase-config.js';
 
 /* ══════════════
    IDENTITY
