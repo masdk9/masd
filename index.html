@@ -1,218 +1,408 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>DigiNotes.net</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DigiNotes.net</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://masd.neocities.org/main/style.css">
 </head>
 <body>
 
-<!-- ══════════ HEADER ══════════ -->
+<!-- ═════ HEADER ════════ -->
 <header class="app-header">
-    <div class="hdr-btn" onclick="openPP()"><i class="bi bi-person-circle"></i></div>
-    <div class="brand">DigiNotes<span class="brand-dot">.net</span></div>
-    <div class="hdr-btn" onclick="openTools()"><i class="bi bi-tools"></i></div>
+<div class="hdr-btn" onclick="openPP()"><i class="bi bi-person-circle"></i></div>
+
+<div class="brand">DigiNotes<span class="brand-dot">.net</span></div>
+
+<div class="hdr-btn" onclick="openTools()"><i class="bi bi-tools"></i></div>
 </header>
 
-<!-- ══════════ MAIN ══════════ -->
+<!-- ══════ MAIN ════════ -->
 <div id="appMain">
-    <div class="ad-slot adsense-slot"><!-- $adsense --></div>
+<div class="ad-slot adsense-slot"><!-- $adsense --></div>
 
-    <!-- HOME TAB -->
-    <div class="tabp on" id="t-HOME">
-        <div class="sec-head">🏠 Home Feed</div>
-        <div class="lf" id="lf-HOME">
-            <button class="lfb on" onclick="fc('HOME','ALL',this)">All</button>
-            <button class="lfb" onclick="fc('HOME','SSC',this)">SSC</button>
-            <button class="lfb" onclick="fc('HOME','Railway',this)">Railway</button>
-            <button class="lfb" onclick="fc('HOME','Bank',this)">Bank</button>
-            <button class="lfb" onclick="fc('HOME','Teaching',this)">Teaching</button>
-            <button class="lfb" onclick="fc('HOME','Graduate',this)">Graduate</button>
-            <button class="lfb" onclick="fc('HOME','12th',this)">12th</button>
+<!-- HOME TAB -->
+<div class="tabp on" id="t-HOME">
+<div class="sec-head">🏠 Home Feed</div>
+<div class="lf" id="lf-HOME">
+<button class="lfb on" onclick="fc('HOME','ALL',this)">All</button>
+<button class="lfb" onclick="fc('HOME','SSC',this)">SSC</button>
+<button class="lfb" onclick="fc('HOME','Railway',this)">Railway</button>
+<button class="lfb" onclick="fc('HOME','Bank',this)">Bank</button>
+<button class="lfb" onclick="fc('HOME','Teaching',this)">Teaching</button>
+<button class="lfb" onclick="fc('HOME','Graduate',this)">Graduate</button>
+<button class="lfb" onclick="fc('HOME','12th',this)">12th</button>
         </div>
         <div id="c-HOME"></div>
     </div>
 
-    <!-- EXAM TAB -->
-    <div class="tabp" id="t-EXAM">
-        <div class="sec-head">📋 Exam & Jobs</div>
-        <div class="lf" id="lf-EXAM">
-            <button class="lfb on" onclick="fc('EXAM','ALL',this)">All</button>
-            <button class="lfb" onclick="fc('EXAM','SSC',this)">SSC</button>
-            <button class="lfb" onclick="fc('EXAM','UPSC',this)">UPSC</button>
-            <button class="lfb" onclick="fc('EXAM','Railway',this)">Railway</button>
-            <button class="lfb" onclick="fc('EXAM','Bank',this)">Bank</button>
-            <button class="lfb" onclick="fc('EXAM','Police',this)">Police</button>
-            <button class="lfb" onclick="fc('EXAM','Teaching',this)">Teaching</button>
-            <button class="lfb" onclick="fc('EXAM','10th',this)">10th</button>
-            <button class="lfb" onclick="fc('EXAM','12th',this)">12th</button>
-            <button class="lfb" onclick="fc('EXAM','Graduate',this)">Graduate</button>
+<!-- EXAM TAB -->
+<div class="tabp" id="t-EXAM">
+<div class="sec-head">📋 Exam & Jobs</div>
+<div class="lf" id="lf-EXAM">
+<button class="lfb on" onclick="fc('EXAM','ALL',this)">All</button>
+<button class="lfb" onclick="fc('EXAM','SSC',this)">SSC</button>
+<button class="lfb" onclick="fc('EXAM','UPSC',this)">UPSC</button>
+<button class="lfb" onclick="fc('EXAM','Railway',this)">Railway</button>
+<button class="lfb" onclick="fc('EXAM','Bank',this)">Bank</button>
+<button class="lfb" onclick="fc('EXAM','Police',this)">Police</button>
+<button class="lfb" onclick="fc('EXAM','Teaching',this)">Teaching</button>
+<button class="lfb" onclick="fc('EXAM','10th',this)">10th</button>
+<button class="lfb" onclick="fc('EXAM','12th',this)">12th</button>
+<button class="lfb" onclick="fc('EXAM','Graduate',this)">Graduate</button>
         </div>
-        <div id="c-EXAM"></div>
+<div id="c-EXAM"></div>
     </div>
 
-    <!-- RESULT TAB -->
-    <div class="tabp" id="t-RESULT">
+<!-- RESULT TAB -->
+<div class="tabp" id="t-RESULT">
         <div class="sec-head">🏆 Results</div>
         <div class="lf" id="lf-RESULT">
-            <button class="lfb on" onclick="fc('RESULT','ALL',this)">All</button>
-            <button class="lfb" onclick="fc('RESULT','SSC',this)">SSC</button>
-            <button class="lfb" onclick="fc('RESULT','Railway',this)">Railway</button>
-            <button class="lfb" onclick="fc('RESULT','Bank',this)">Bank</button>
-            <button class="lfb" onclick="fc('RESULT','Teaching',this)">Teaching</button>
-            <button class="lfb" onclick="fc('RESULT','State',this)">State</button>
+<button class="lfb on" onclick="fc('RESULT','ALL',this)">All</button>
+<button class="lfb" onclick="fc('RESULT','SSC',this)">SSC</button>
+<button class="lfb" onclick="fc('RESULT','Railway',this)">Railway</button>
+<button class="lfb" onclick="fc('RESULT','Bank',this)">Bank</button>
+<button class="lfb" onclick="fc('RESULT','Teaching',this)">Teaching</button>
+<button class="lfb" onclick="fc('RESULT','State',this)">State</button>
         </div>
         <div id="c-RESULT"></div>
     </div>
 
-    <!-- UPDATES TAB -->
-    <div class="tabp" id="t-UPDATES">
+<!-- UPDATES TAB -->
+<div class="tabp" id="t-UPDATES">
         <div class="sec-head">🔔 Updates</div>
-        <div class="lf" id="lf-UPDATES">
-            <button class="lfb on" onclick="fc('UPDATES','ALL',this)">All</button>
-            <button class="lfb" onclick="fc('UPDATES','Admit Card',this)">Admit Card</button>
-            <button class="lfb" onclick="fc('UPDATES','Answer Key',this)">Answer Key</button>
-            <button class="lfb" onclick="fc('UPDATES','SSC',this)">SSC</button>
-            <button class="lfb" onclick="fc('UPDATES','Railway',this)">Railway</button>
+<div class="lf" id="lf-UPDATES">
+<button class="lfb on" onclick="fc('UPDATES','ALL',this)">All</button>
+<button class="lfb" onclick="fc('UPDATES','Admit Card',this)">Admit Card</button>
+<button class="lfb" onclick="fc('UPDATES','Answer Key',this)">Answer Key</button>
+<button class="lfb" onclick="fc('UPDATES','SSC',this)">SSC</button>
+<button class="lfb" onclick="fc('UPDATES','Railway',this)">Railway</button>
         </div>
         <div id="c-UPDATES"></div>
     </div>
 
-    <!-- LIBRARY TAB -->
-    <div class="tabp" id="t-LIBRARY">
-        <div class="sec-head">📚 Library</div>
-        <div class="lf" id="lf-LIBRARY">
-            <button class="lfb on" onclick="fc('LIBRARY','ALL',this)">All</button>
-            <button class="lfb" onclick="fc('LIBRARY','Notes',this)">Notes</button>
-            <button class="lfb" onclick="fc('LIBRARY','Books',this)">Books</button>
-            <button class="lfb" onclick="fc('LIBRARY','PYQ',this)">PYQ</button>
-            <button class="lfb" onclick="fc('LIBRARY','SSC',this)">SSC</button>
-            <button class="lfb" onclick="fc('LIBRARY','Maths',this)">Maths</button>
+<!-- LIBRARY TAB -->
+<div class="tabp" id="t-LIBRARY">
+<div class="sec-head">📚 Library</div>
+<div class="lf" id="lf-LIBRARY">
+<button class="lfb on" onclick="fc('LIBRARY','ALL',this)">All</button>
+<button class="lfb" onclick="fc('LIBRARY','Notes',this)">Notes</button>
+<button class="lfb" onclick="fc('LIBRARY','Books',this)">Books</button>
+<button class="lfb" onclick="fc('LIBRARY','PYQ',this)">PYQ</button>
+<button class="lfb" onclick="fc('LIBRARY','SSC',this)">SSC</button>
+<button class="lfb" onclick="fc('LIBRARY','Maths',this)">Maths</button>
         </div>
         <div id="c-LIBRARY"></div>
     </div>
 </div>
 
-<!-- ══════════ BOTTOM NAV ══════════ -->
+<!-- ══════ BOTTOM NAV ══════ -->
 <nav class="bnav">
-    <div class="ni on" onclick="st('HOME',this)"><i class="bi bi-house-door-fill"></i><span>Home</span></div>
-    <div class="ni" onclick="st('EXAM',this)"><i class="bi bi-briefcase-fill"></i><span>Exam</span></div>
-    <div class="ni" onclick="st('RESULT',this)"><i class="bi bi-trophy-fill"></i><span>Result</span></div>
-    <div class="ni" onclick="st('UPDATES',this)"><i class="bi bi-bell-fill"></i><span>Updates</span></div>
-    <div class="ni" onclick="st('LIBRARY',this)"><i class="bi bi-journal-bookmark-fill"></i><span>Library</span></div>
+
+<div class="ni on" onclick="st('HOME',this)"><i class="bi bi-house-door-fill"></i><span>Home</span></div>
+
+<div class="ni" onclick="st('EXAM',this)"><i class="bi bi-briefcase-fill"></i><span>Exam</span></div>
+
+<div class="ni" onclick="st('RESULT',this)"><i class="bi bi-trophy-fill"></i><span>Result</span></div>
+<div class="ni" onclick="st('UPDATES',this)"><i class="bi bi-bell-fill"></i><span>Updates</span></div>
+
+<div class="ni" onclick="st('LIBRARY',this)"><i class="bi bi-journal-bookmark-fill"></i><span>Library</span></div>
 </nav>
 
-<!-- ══════════ FULL PAGE OVERLAY ══════════ -->
+<!-- ════ OVERLAY ════════ -->
 <div class="fp-overlay" id="fpg">
     <div class="fp-bar">
-        <div class="fp-back" onclick="closeFP()"><i class="bi bi-arrow-left"></i></div>
-        <span class="fp-bar-title" id="fpTitle">Details</span>
-        <span class="fp-bar-badge" id="fpBadge"></span>
+<div class="fp-back" onclick="closeFP()"><i class="bi bi-arrow-left"></i></div>
+<span class="fp-bar-title" id="fpTitle">Details</span>
+<span class="fp-bar-badge" id="fpBadge"></span>
     </div>
     <div id="fpBody"></div>
 </div>
 
-<!-- ══════════ PROFILE PAGE ══════════ -->
+<!-- ════ PROFILE PAGE ═══════ -->
 <div class="side-page pp-page" id="ppg">
     <div class="side-header">
-        <div class="fp-back" onclick="closePP()"><i class="bi bi-arrow-left"></i></div>
-        <span class="side-title">DigiNotes.net</span>
+<div class="fp-back" onclick="closePP()"><i class="bi bi-arrow-left"></i></div>
+<span class="side-title">DigiNotes.net</span>
     </div>
     <div class="pp-tabs">
-        <button class="pp-tab on" onclick="ppTab('about',this)">📖 About</button>
-        <button class="pp-tab" onclick="ppTab('contact',this)">📬 Contact</button>
-        <button class="pp-tab" onclick="ppTab('dmca',this)">⚖️ DMCA</button>
+<button class="pp-tab on" onclick="ppTab('about',this)">📖 About</button>
+<button class="pp-tab" onclick="ppTab('contact',this)">📬 Contact</button>
+<button class="pp-tab" onclick="ppTab('dmca',this)">⚖️ DMCA</button>
     </div>
 
     <!-- ABOUT -->
     <div class="pp-sec on" id="pp-about">
         <div class="about-hero">
-            <div class="about-logo">📚</div>
-            <div class="about-name">DigiNotes.net</div>
-            <div class="about-desc">Students ke liye ek free educational platform — exam notifications, results, answer keys aur study material. Hamare saath rahein, apni taiyari mazboot karein!</div>
+<div class="about-logo">📚</div>
+<div class="about-name">DigiNotes.net</div>
         </div>
-        <div class="stats-grid">
-            <div class="stat-card"><div class="stat-num" style="color:var(--cyan)" id="sv1">0</div><div class="stat-lbl">Total Views</div></div>
-            <div class="stat-card"><div class="stat-num" style="color:var(--yellow)" id="sv2">0</div><div class="stat-lbl">This Month</div></div>
-            <div class="stat-card"><div class="stat-num" style="color:var(--lime)" id="sv3">0</div><div class="stat-lbl">Posts</div></div>
-            <div class="stat-card"><div class="stat-num" style="color:var(--orange)" id="sv4">0</div><div class="stat-lbl">Daily Visitors</div></div>
+
+        <!-- ABOUT BOX -->
+        <div class="sb sb-o" style="margin-bottom:12px">
+<div class="sbt" style="color:var(--orange)">📖 Hamare Baare Mein</div>
+<p style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:10px">
+<strong style="color:var(--orange)">DigiNotes.net</strong> ek free educational platform hai jo India ke government job aspirants ke liye banaya gaya hai. Hum latest exam notifications, results, admit cards, answer keys aur study material ek hi jagah provide karte hain.
+</p>
+<p style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:10px">
+Hamara maksad hai ki har student — chahe wo SSC, Railway, Bank, UPSC ya kisi bhi government exam ki taiyari kar raha ho — use sahi aur timely information milti rahe, bilkul free mein.
+</p>
+<p style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.75;margin:0">
+Hum regularly verified aur authentic content publish karte hain taaki aapki taiyari mein koi rukawat na aaye. <strong style="color:#fff">DigiNotes.net</strong> — Aapki taiyari, hamaari zimmedaari. 🎯
+</p>
         </div>
+
+        <!-- SOCIAL -->
         <div class="social-row">
-            <button class="soc-btn tg"><i class="bi bi-telegram"></i>Telegram</button>
-            <button class="soc-btn wa"><i class="bi bi-whatsapp"></i>WhatsApp</button>
-            <button class="soc-btn ig"><i class="bi bi-instagram"></i>Instagram</button>
+<button class="soc-btn tg"><i class="bi bi-twitter"></i>Twitter</button>
+<button class="soc-btn wa"><i class="bi bi-whatsapp"></i>WhatsApp</button>
+<button class="soc-btn ig"><i class="bi bi-instagram"></i>Instagram</button>
         </div>
-        <div class="donation-box">
-            <div class="don-title">☕ Ek Chai Pilaao!</div>
-            <div class="don-text">Ye platform free hai aur hamesha rahega. Agar hamaari mehnat ne aapki padhai mein help ki toh ek chai zaroor pilaao! 🙏</div>
-            <div class="qr-ph"><div><div style="font-size:28px;margin-bottom:4px">📱</div><div>UPI QR Code</div><div style="font-size:9px;color:#888;margin-top:2px">diginotes@upi</div></div></div>
-            <div class="upi-id">diginotes@upi</div>
-        </div>
+
+        <!-- IMPORTANT LINKS -->
         <div class="sb sb-pu">
-            <div class="sbt" style="color:var(--purple)">🔗 Quick Links</div>
-            <div class="dl-row"><div class="dl-left"><div class="dl-icon" style="background:rgba(191,95,255,.12)">🌐</div><div><div class="dl-name">Official Website</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
-            <div class="dl-row"><div class="dl-left"><div class="dl-icon" style="background:rgba(255,107,53,.1)">📄</div><div><div class="dl-name">Privacy Policy</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
-            <div class="dl-row" style="margin-bottom:0"><div class="dl-left"><div class="dl-icon" style="background:rgba(0,229,255,.1)">📋</div><div><div class="dl-name">Terms of Use</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="sbt" style="color:var(--purple)">🔗 Important Links</div>
+<div class="dl-row" onclick="window.open('../pages/about.html','_blank')"><div class="dl-left"><div class="dl-icon" style="background:rgba(255,107,53,.12)">📖</div><div><div class="dl-name">About Us</div><div class="dl-sub">Hamare baare mein jaanein</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="dl-row" onclick="window.open('../pages/privacy.html','_blank')"><div class="dl-left"><div class="dl-icon" style="background:rgba(0,229,255,.12)">🔒</div><div><div class="dl-name">Privacy Policy</div><div class="dl-sub">Aapka data safe hai</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="dl-row" onclick="window.open('../pages/terms.html','_blank')"><div class="dl-left"><div class="dl-icon" style="background:rgba(191,95,255,.12)">📋</div><div><div class="dl-name">Terms of Use</div><div class="dl-sub">Upyog ki shartein</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="dl-row" onclick="window.open('../pages/disclaimer.html','_blank')"><div class="dl-left"><div class="dl-icon" style="background:rgba(255,229,0,.12)">⚠️</div><div><div class="dl-name">Disclaimer</div><div class="dl-sub">Soochna evam aswikriti</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="dl-row" onclick="window.open('../pages/sitemap.xml','_blank')"><div class="dl-left"><div class="dl-icon" style="background:rgba(57,255,20,.12)">🗺️</div><div><div class="dl-name">Sitemap</div><div class="dl-sub">Saare pages ki list</div></div></div><i class="bi bi-box-arrow-up-right"></i></div>
+<div class="dl-row" style="margin-bottom:0" onclick="document.querySelector('.pp-tab:nth-child(2)').click()"><div class="dl-left"><div class="dl-icon" style="background:rgba(255,60,172,.12)">📬</div><div><div class="dl-name">Contact Us</div><div class="dl-sub">Humse sampark karein</div></div></div><i class="bi bi-chevron-right"></i></div>
         </div>
     </div>
 
     <!-- CONTACT -->
     <div class="pp-sec" id="pp-contact">
-        <div class="sb sb-o" style="margin-top:12px">
-            <div class="sbt" style="color:var(--orange)">📬 Hamse Sampark Karein</div>
-            <div class="form-grp"><label>NAAM</label><input type="text" placeholder="Aapka naam"></div>
-            <div class="form-grp"><label>EMAIL</label><input type="email" placeholder="aapka@email.com"></div>
-            <div class="form-grp"><label>VISHAY</label>
-                <select><option>General Query</option><option>Content Error</option><option>Suggestion</option><option>Sponsorship</option><option>Other</option></select>
+<div class="sb sb-o" style="margin-top:12px">
+<div class="sbt" style="color:var(--orange)">📬 Hamse Sampark Karein</div>
+<div class="form-grp"><label>NAAM</label><input type="text" placeholder="Aapka naam"></div>
+<div class="form-grp"><label>EMAIL</label><input type="email" placeholder="aapka@email.com"></div>
+<div class="form-grp"><label>VISHAY</label>
+<select><option>General Query</option><option>Content Error</option><option>Suggestion</option><option>Sponsorship</option><option>Other</option></select>
             </div>
-            <div class="form-grp"><label>SANDESH</label><textarea placeholder="Apna message likhein..."></textarea></div>
-            <button class="btn-m ba" style="margin-top:4px"><i class="bi bi-send-fill"></i> Send Message</button>
+<div class="form-grp"><label>SANDESH</label><textarea placeholder="Apna message likhein..."></textarea></div>
+<button class="btn-m ba" style="margin-top:4px"><i class="bi bi-send-fill"></i> Send Message</button>
         </div>
     </div>
 
     <!-- DMCA -->
     <div class="pp-sec" id="pp-dmca">
-        <div class="sb sb-p" style="margin-top:12px">
-            <div class="sbt" style="color:var(--pink)">⚖️ DMCA / Report</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:12px">Galat ya copyrighted content report karein. Hum 48 ghante mein action lenge.</div>
-            <div class="form-grp"><label>NAAM / ORGANIZATION</label><input type="text" placeholder="Aapka naam"></div>
-            <div class="form-grp"><label>EMAIL</label><input type="email" placeholder="aapka@email.com"></div>
-            <div class="form-grp"><label>REPORT TYPE</label>
-                <select><option>DMCA Copyright</option><option>Galat Content</option><option>Spam</option><option>Other</option></select>
+<div class="sb sb-p" style="margin-top:12px">
+<div class="sbt" style="color:var(--pink)">⚖️ DMCA / Report</div>
+<div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:12px">Galat ya copyrighted content report karein. Hum 48 ghante mein action lenge.</div>
+<div class="form-grp"><label>NAAM / ORGANIZATION</label><input type="text" placeholder="Aapka naam"></div>
+<div class="form-grp"><label>EMAIL</label><input type="email" placeholder="aapka@email.com"></div>
+<div class="form-grp"><label>REPORT TYPE</label>
+<select><option>DMCA Copyright</option><option>Galat Content</option><option>Spam</option><option>Other</option></select>
             </div>
-            <div class="form-grp"><label>POST URL</label><input type="url" placeholder="https://..."></div>
-            <div class="form-grp"><label>DETAILS</label><textarea placeholder="Puri baat likhein..."></textarea></div>
-            <button class="btn-m bp" style="margin-top:4px"><i class="bi bi-flag-fill"></i> Report Submit</button>
+<div class="form-grp"><label>POST URL</label><input type="url" placeholder="https://..."></div>
+<div class="form-grp"><label>DETAILS</label><textarea placeholder="Puri baat likhein..."></textarea></div>
+<button class="btn-m bp" style="margin-top:4px"><i class="bi bi-flag-fill"></i> Report Submit</button>
         </div>
     </div>
 </div>
 
-<!-- ══════════ TOOLS PAGE ══════════ -->
+<!-- ═════ TOOLS PAGE ═════ -->
 <div class="side-page tools-page" id="toolsPg">
     <div class="side-header">
-        <div class="fp-back" onclick="closeTools()"><i class="bi bi-arrow-left"></i></div>
-        <span class="side-title">Student Tools</span>
+<div class="fp-back" onclick="closeTools()"><i class="bi bi-arrow-left"></i></div>
+<span class="side-title">Student Tools</span>
     </div>
-    <div style="padding:8px 14px 4px;font-size:10px;color:rgba(255,255,255,.35);font-weight:600">Exam ke liye zaroori tools — bilkul free!</div>
+    
+<div style="padding:8px 14px 4px;font-size:10px;color:#fff; text-align: center; font-weight:600">Important Exam tools — free!</div>
     <div class="ad-slot adsense-slot" style="padding:0 14px 8px"><!-- $adsense --></div>
-    <div class="tools-grid">
-        <div class="tool-card" style="border-color:rgba(255,107,53,.2)"><div class="tool-icon">🖼️</div><div class="tool-name" style="color:var(--orange)">Image Resizer</div><div class="tool-desc">Photo ka size KB mein change karein</div></div>
-        <div class="tool-card" style="border-color:rgba(0,229,255,.2)"><div class="tool-icon">✂️</div><div class="tool-name" style="color:var(--cyan)">Image Cropper</div><div class="tool-desc">Photo ko desired size mein crop karein</div></div>
-        <div class="tool-card" style="border-color:rgba(255,229,0,.2)"><div class="tool-icon">🔗</div><div class="tool-name" style="color:var(--yellow)">Photo+Sign Joiner</div><div class="tool-desc">Form ke liye photo aur sign ek saath</div></div>
-        <div class="tool-card" style="border-color:rgba(191,95,255,.2)"><div class="tool-icon">📄</div><div class="tool-name" style="color:var(--purple)">JPG to PDF</div><div class="tool-desc">Images ko PDF mein convert karein</div></div>
-        <div class="tool-card" style="border-color:rgba(57,255,20,.2)"><div class="tool-icon">🗜️</div><div class="tool-name" style="color:var(--lime)">PDF Compressor</div><div class="tool-desc">PDF ka size kam karein</div></div>
-        <div class="tool-card" style="border-color:rgba(255,60,172,.2)"><div class="tool-icon">🗑️</div><div class="tool-name" style="color:var(--pink)">BG Remover</div><div class="tool-desc">Photo ka background hatayein</div></div>
-        <div class="tool-card" style="border-color:rgba(255,107,53,.2)"><div class="tool-icon">🎂</div><div class="tool-name" style="color:var(--orange)">Age Calculator</div><div class="tool-desc">DOB se exact age nikaalein</div></div>
-        <div class="tool-card" style="border-color:rgba(0,229,255,.2)"><div class="tool-icon">📝</div><div class="tool-name" style="color:var(--cyan)">Word Counter</div><div class="tool-desc">Words aur characters count karein</div></div>
+<div class="tools-grid">
+<div class="tool-card" onclick="openTool('resize')" style="border-color:rgba(0,122,255,.25)"><div class="tool-icon">🖼️</div><div class="tool-name">Image Resizer</div><div class="tool-desc">Photo size adjust karo</div></div>
+<div class="tool-card" onclick="openTool('crop')"   style="border-color:rgba(50,173,230,.25)"><div class="tool-icon">✂️</div><div class="tool-name">Image Cropper</div><div class="tool-desc">Photo crop karo</div></div>
+<div class="tool-card" onclick="openTool('join')"   style="border-color:rgba(255,214,10,.25)"><div class="tool-icon">🔗</div><div class="tool-name">Photo+Sign Joiner</div><div class="tool-desc">Photo aur signature jodo</div></div>
+<div class="tool-card" onclick="openTool('pdf')"    style="border-color:rgba(191,90,242,.25)"><div class="tool-icon">📄</div><div class="tool-name">JPG to PDF</div><div class="tool-desc">Images ko PDF banao</div></div>
+<div class="tool-card" onclick="openTool('pdfcomp')" style="border-color:rgba(48,209,88,.25)"><div class="tool-icon">🗜️</div><div class="tool-name">PDF Compressor</div><div class="tool-desc">PDF size kam karo</div></div>
+<div class="tool-card" onclick="openTool('bgrem')"  style="border-color:rgba(255,55,95,.25)"><div class="tool-icon">🗑️</div><div class="tool-name">BG Remover</div><div class="tool-desc">Photo background hatao</div></div>
+<div class="tool-card" onclick="openTool('age')"    style="border-color:rgba(255,159,10,.25)"><div class="tool-icon">🎂</div><div class="tool-name">Age Calculator</div><div class="tool-desc">Apni sahi umar jaano</div></div>
+<div class="tool-card" onclick="openTool('words')"  style="border-color:rgba(50,173,230,.25)"><div class="tool-icon">📝</div><div class="tool-name">Word Counter</div><div class="tool-desc">Words aur characters gino</div></div>
+</div>
+
+<!-- ═════ TOOLS PAGE ENDS ABOVE ═════ -->
+
+<!-- ═══ TOOL OVERLAYS ═══ -->
+
+<!-- Age Calculator -->
+<div class="fp-overlay" id="tool-age">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('age')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">🎂 Age Calculator</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-y" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--yellow)">📅 Date of Birth daalo</div>
+    <div class="form-grp"><label>Date of Birth</label><input type="date" id="ac-dob" max="2020-01-01"></div>
+    <button class="btn-m ba" onclick="calcAge()"><i class="bi bi-calculator-fill"></i> Calculate Age</button>
+    <div id="ac-result"></div>
+  </div>
+  <div class="sb sb-c">
+    <div class="sbt" style="color:var(--teal)">ℹ️ Kab kaam aata hai?</div>
+    <p style="font-size:12px;color:var(--text2);line-height:1.7">Govt job forms mein exact age likhni hoti hai — years, months, days. Ye tool wahi calculate karta hai aaj ki date se.</p>
+  </div>
+</div>
+</div>
+
+<!-- Word Counter -->
+<div class="fp-overlay" id="tool-words">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('words')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">📝 Word Counter</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-c" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--teal)">📋 Text yahan paste karo</div>
+    <textarea id="wc-input" oninput="countWords()" style="width:100%;min-height:180px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:12px;color:var(--text);font-family:Poppins,sans-serif;font-size:13px;outline:none;resize:vertical" placeholder="Apna text yahan paste karo..."></textarea>
+    <div id="wc-result"></div>
+  </div>
+</div>
+</div>
+
+<!-- Image Resizer -->
+<div class="fp-overlay" id="tool-resize">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('resize')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">🖼️ Image Resizer</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-c" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--teal)">📁 Image Select Karo</div>
+    <input type="file" accept="image/*" onchange="handleImgResize(event)" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px;color:var(--text);font-size:12px">
+    <img id="ir-preview" style="display:none;width:100%;border-radius:12px;margin-top:10px;max-height:200px;object-fit:contain">
+    <div id="ir-info" style="font-size:11px;color:var(--text2);margin-top:6px;text-align:center"></div>
+  </div>
+  <div class="sb sb-y" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--yellow)">📐 Naya Size</div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="form-grp" style="flex:1;margin:0"><label>Width (px)</label><input type="number" id="ir-w" oninput="lockAspect('w')" placeholder="800"></div>
+      <span style="color:var(--text2);font-size:18px;padding-top:16px">×</span>
+      <div class="form-grp" style="flex:1;margin:0"><label>Height (px)</label><input type="number" id="ir-h" oninput="lockAspect('h')" placeholder="600"></div>
     </div>
+  </div>
+  <button class="btn-m ba" onclick="doResize()"><i class="bi bi-download"></i> Resize & Download</button>
+</div>
+</div>
+
+<!-- Image Cropper -->
+<div class="fp-overlay" id="tool-crop">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('crop')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">✂️ Image Cropper</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-c" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--teal)">📁 Image Select Karo</div>
+    <input type="file" accept="image/*" onchange="handleCropImg(event)" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px;color:var(--text);font-size:12px">
+    <div style="position:relative;margin-top:10px">
+      <img id="ic-canvas-img" style="display:none;width:100%;border-radius:12px;max-height:220px;object-fit:contain">
+      <div id="ic-hint" style="text-align:center;padding:20px;color:var(--text3);font-size:12px">Image upload karo</div>
+    </div>
+  </div>
+  <div class="sb sb-y" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--yellow)">✂️ Crop Area (pixels)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="form-grp" style="margin:0"><label>X (Left)</label><input type="number" id="ic-x" placeholder="0" value="0"></div>
+      <div class="form-grp" style="margin:0"><label>Y (Top)</label><input type="number" id="ic-y" placeholder="0" value="0"></div>
+      <div class="form-grp" style="margin:0"><label>Width</label><input type="number" id="ic-w" placeholder="Width"></div>
+      <div class="form-grp" style="margin:0"><label>Height</label><input type="number" id="ic-h" placeholder="Height"></div>
+    </div>
+  </div>
+  <button class="btn-m ba" onclick="doCrop()"><i class="bi bi-download"></i> Crop & Download</button>
+</div>
+</div>
+
+<!-- Photo+Sign Joiner -->
+<div class="fp-overlay" id="tool-join">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('join')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">🔗 Photo+Sign Joiner</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-c" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--teal)">📸 Photo Upload Karo</div>
+    <input type="file" accept="image/*" onchange="handleJoinImg('photo',event)" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px;color:var(--text);font-size:12px">
+    <img id="pj-photo-prev" style="display:none;max-height:120px;border-radius:8px;margin-top:8px">
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <div class="form-grp" style="flex:1;margin:0"><label>Width (px)</label><input type="number" id="pj-pw" value="200"></div>
+      <div class="form-grp" style="flex:1;margin:0"><label>Height (px)</label><input type="number" id="pj-ph" value="230"></div>
+    </div>
+  </div>
+  <div class="sb sb-y" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--yellow)">✍️ Signature Upload Karo</div>
+    <input type="file" accept="image/*" onchange="handleJoinImg('sign',event)" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px;color:var(--text);font-size:12px">
+    <img id="pj-sign-prev" style="display:none;max-height:80px;border-radius:8px;margin-top:8px">
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <div class="form-grp" style="flex:1;margin:0"><label>Width (px)</label><input type="number" id="pj-sw" value="140"></div>
+      <div class="form-grp" style="flex:1;margin:0"><label>Height (px)</label><input type="number" id="pj-sh" value="60"></div>
+    </div>
+  </div>
+  <button class="btn-m ba" onclick="doJoin()"><i class="bi bi-download"></i> Join & Download</button>
+</div>
+</div>
+
+<!-- JPG to PDF -->
+<div class="fp-overlay" id="tool-pdf">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('pdf')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">📄 JPG to PDF</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-c" style="margin-bottom:12px">
+    <div class="sbt" style="color:var(--teal)">📁 Images Select Karo</div>
+    <input type="file" accept="image/*" multiple id="jp-files" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px;color:var(--text);font-size:12px">
+    <div style="font-size:11px;color:var(--text2);margin-top:6px">Multiple images select kar sakte ho — sab ek PDF mein ayengi</div>
+  </div>
+  <button class="btn-m ba" onclick="doJpgToPdf()"><i class="bi bi-file-pdf-fill"></i> PDF Banao & Download</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</div>
+</div>
+
+<!-- PDF Compressor — Notice -->
+<div class="fp-overlay" id="tool-pdfcomp">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('pdfcomp')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">🗜️ PDF Compressor</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-p">
+    <div class="sbt" style="color:var(--purple)">⚠️ Browser Limitation</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">Browser mein true PDF compression possible nahi hai bina server ke. Abhi ye tool <strong style="color:var(--text)">ilovepdf.com</strong> pe redirect karega.</p>
+    <button class="btn-m ba" style="margin-top:12px" onclick="window.open('https://www.ilovepdf.com/compress_pdf','_blank')"><i class="bi bi-box-arrow-up-right"></i> iLovePDF pe Compress Karo</button>
+  </div>
+</div>
+</div>
+
+<!-- BG Remover — Notice -->
+<div class="fp-overlay" id="tool-bgrem">
+<div class="fp-bar">
+  <div class="fp-back" onclick="closeTool('bgrem')"><i class="bi bi-arrow-left"></i></div>
+  <span class="fp-bar-title">🗑️ BG Remover</span>
+</div>
+<div style="padding:16px">
+  <div class="sb sb-p">
+    <div class="sbt" style="color:var(--purple)">⚠️ AI Required</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">Background removal ke liye AI model chahiye jo browser mein heavy hota hai. Abhi ye tool <strong style="color:var(--text)">remove.bg</strong> pe redirect karega — bilkul free!</p>
+    <button class="btn-m ba" style="margin-top:12px" onclick="window.open('https://www.remove.bg','_blank')"><i class="bi bi-box-arrow-up-right"></i> remove.bg pe Jaao</button>
+  </div>
+</div>
+</div>
 </div>
 
 <!-- TOAST -->
 <div class="toast-msg" id="toast"></div>
 
-<script type="module" src="app.js"></script>
+<script type="module" src="https://masd.neocities.org/main/app.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
