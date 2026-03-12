@@ -1,24 +1,19 @@
-/* ═══════════════════════════════════════════════
-   DIGINOTES.NET — FIREBASE CONFIGURATION
-   Ek baar config, dono jagah use hoga
-   (index.html + admin.html dono mein include karo)
-═══════════════════════════════════════════════ */
+/* ═══ FIREBASE CONFIGURATION ════ */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import { getFirestore, collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, limit, where, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-storage.js";
 
-// ── Firebase Config ──
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey:            "AIzaSyCVnKWwaQEh6APBiIFg3NwuUJpx-8vtdpU",
-    authDomain:        "diginotes-v1.firebaseapp.com",
-    projectId:         "diginotes-v1",
-    storageBucket:     "diginotes-v1.firebasestorage.app",
-    messagingSenderId: "544073986826",
-    appId:             "1:544073986826:web:2d070b321a1bf7889e40f3",
-    measurementId:     "G-655FTN7L0R"
-};
+    apiKey: "AIzaSyCsBLzRlUjSpNub-VIZ9xBq1ilia_eNs2s",
+    authDomain: "diginotes-app.firebaseapp.com",
+    projectId: "diginotes-app",
+    storageBucket: "diginotes-app.firebasestorage.app",
+    messagingSenderId: "301708682852",
+    appId: "1:301708682852:web:9d6af37c07474a3611a171"
+  };
 
 // ── Initialize ──
 const app     = initializeApp(firebaseConfig);
@@ -44,9 +39,9 @@ function makeSlug(title) {
         .slice(0, 80);                   // max 80 chars
 }
 
-// ═══════════════════════════════════════
+// ═════════════
 // POST FUNCTIONS
-// ═══════════════════════════════════════
+// ═════════════
 
 // Sare posts fetch karo (feed ke liye)
 async function fetchPosts(tabFilter = 'HOME', labelFilter = 'ALL') {
@@ -105,8 +100,9 @@ async function createPost(postData) {
             created_at: serverTimestamp(),
             updated_at: serverTimestamp()
         }).catch(async () => {
-            // Doc doesn't exist, create it
-            const { setDoc } = await import("https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js");
+
+// Doc doesn't exist, create it
+const { setDoc } = await import("https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js");
             await setDoc(docRef, {
                 ...postData,
                 slug,
@@ -155,9 +151,9 @@ async function incrementView(slug) {
     } catch (e) {}
 }
 
-// ═══════════════════════════════════════
+// ════════════
 // LIKE FUNCTIONS
-// ═══════════════════════════════════════
+// ════════════
 
 function getLikeKey(slug) {
     return `dn_like_${slug}`;
@@ -184,9 +180,9 @@ async function toggleLike(slug, currentLikes) {
     }
 }
 
-// ═══════════════════════════════════════
+// ══════════════
 // COMMENT FUNCTIONS
-// ═══════════════════════════════════════
+// ══════════════
 
 // Comments fetch karo
 async function fetchComments(postSlug) {
@@ -262,9 +258,9 @@ async function deleteComment(postSlug, commentId) {
     }
 }
 
-// ═══════════════════════════════════════
+// ═══════════════
 // SETTINGS FUNCTIONS
-// ═══════════════════════════════════════
+// ═══════════════
 
 async function fetchSettings() {
     try {
@@ -285,25 +281,30 @@ async function saveSettings(data) {
     }
 }
 
-// ═══════════════════════════════════════
+// ════════════════
 // IMAGE UPLOAD (Admin)
-// ═══════════════════════════════════════
+// ════════════════
 
 async function uploadImage(file, path) {
     try {
-        const storageRef = ref(storage, `images/${path}/${Date.now()}_${file.name}`);
+        const storageRef = ref(storage, path);
         const snap       = await uploadBytes(storageRef, file);
         const url        = await getDownloadURL(snap.ref);
         return { url, path: snap.ref.fullPath };
     } catch (e) {
         console.error('uploadImage error:', e);
-        return { error: 'Upload failed' };
+        const msg = e.code === 'storage/unauthorized'
+            ? 'Permission denied — Firebase Storage rules check karo'
+            : e.code === 'storage/unknown'
+            ? 'Network error — internet check karo'
+            : e.message || 'Upload failed';
+        throw new Error(msg);
     }
 }
 
-// ═══════════════════════════════════════
+// ══════════════════
 // AUTH FUNCTIONS (Admin)
-// ═══════════════════════════════════════
+// ═════════════════
 
 async function adminLogin(email, password) {
     try {
@@ -323,9 +324,9 @@ async function adminLogout() {
     }
 }
 
-// ═══════════════════════════════════════
+// ════════════
 // CONTENT FILTER
-// ═══════════════════════════════════════
+// ════════════
 
 const BAD_WORDS = ['bekar', 'bakwas', 'gandu', 'mc', 'bc'];
 function hasPhone(t)  { return /\d{10,}/.test(t); }
@@ -336,9 +337,9 @@ function filterBadWords(t) {
     return f;
 }
 
-// ═══════════════════════════════════════
+// ═══════
 // UTILITIES
-// ═══════════════════════════════════════
+// ═══════
 
 function formatNum(n) {
     if (!n) return '0';
@@ -355,9 +356,9 @@ function timeAgo(ts) {
     return Math.floor(diff / 86400) + 'd ago';
 }
 
-// ═══════════════════════════════════════
-// EXPORT — dono files use kar sakti hain
-// ═══════════════════════════════════════
+// ═════
+// EXPORT
+// ═════
 
 export {
     db, auth, storage,
